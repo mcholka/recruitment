@@ -26,6 +26,7 @@ public class DataExtractor {
     }
 
     private String tryToFindValue(String document, String interestingValue) {
+        logger.info("Try to find value: " + interestingValue);
         if(document.contains(interestingValue)){
             logger.info("Found without any changes! Value: " + interestingValue);
             return interestingValue;
@@ -41,6 +42,7 @@ public class DataExtractor {
             logger.info("Found before formatted! Value: " + interestingValue);
             return interestingValue;
         }
+        logger.info("Value not found...");
         return null;
     }
 

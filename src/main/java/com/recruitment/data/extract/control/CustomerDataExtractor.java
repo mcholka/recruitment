@@ -8,10 +8,8 @@ import org.apache.pdfbox.util.PDFTextStripper;
 
 import javax.inject.Inject;
 import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
-import java.util.List;
 
 /**
  * Created by mcholka on 2014-03-26. Enjoy!
@@ -27,6 +25,7 @@ public class CustomerDataExtractor {
     public KnowledgeCommon extractData(CustomerData customerData) throws IOException {
         logger.info("Extracting data for customer: " + customerData.getId());
         String document = getDocument(customerData.getStoredCv());
+        logger.info("Parse document:\n" + document);
         KnowledgeCommon customerExtractedData = tryToFoundDataInDocument(document);
         logger.info("\nFound: " +
                 "\nExperience data: " + customerExtractedData.getExperience().size() +

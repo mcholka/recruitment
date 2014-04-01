@@ -14,6 +14,8 @@ import java.util.Date;
 public class Profession implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "professionGenerator")
+    @SequenceGenerator(name = "professionGenerator", sequenceName = "profession_id_seq", allocationSize = 1)
     private String id;
 
     private String description;

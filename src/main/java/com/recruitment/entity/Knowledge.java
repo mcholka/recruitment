@@ -15,6 +15,8 @@ import java.io.Serializable;
 })
 public class Knowledge implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "knowledgeGenerator")
+    @SequenceGenerator(name = "knowledgeGenerator", sequenceName = "knowledge_id_seq", allocationSize = 1)
     private Long id;
 
     private String value;

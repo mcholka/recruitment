@@ -1,7 +1,6 @@
 package com.recruitment.data.extract.boundary;
 
 import com.recruitment.crud.CustomerDataFinder;
-import com.recruitment.data.extract.control.CustomerDataExtractor;
 import com.recruitment.data.extract.control.CustomerExtractFacade;
 import com.recruitment.entity.CustomerData;
 import org.apache.log4j.Logger;
@@ -25,7 +24,7 @@ public class FileExtractorTimer {
     @Inject
     private CustomerExtractFacade customerExtractFacade;
 
-    @Schedule(persistent = false, hour = "*", minute = "*/3", second = "0")
+    @Schedule(persistent = false, hour = "*", minute = "*/1", second = "0")
     public void extractDocuments(){
         logger.info("Start FileExtractorTimer work");
         List<CustomerData> customers = getCustomersToExtractData();
