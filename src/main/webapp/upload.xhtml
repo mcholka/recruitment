@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/resources/template/main.xhtml">
+
+    <ui:define name="head">
+        <h:outputStylesheet library="css" name="login.css" />
+    </ui:define>
+
+    <ui:define name="body">
+        <div id="filUploadForm">
+            <h:form enctype="multipart/form-data">
+                <h:outputText value="Witaj w systemie rekrutacji, prześlij swoje dane!"
+                              style="text-align: center; font-size: 16px;"/>
+
+                <h:panelGrid columns="2">
+                    <h:outputText value="Imię: "/>
+                    <p:inputText value="#{customerDataController.firstName}"
+                                 required="true"
+                                 requiredMessage="Imię nie może być puste"/>
+
+                    <h:outputText value="Nazwisko: "/>
+                    <p:inputText value="#{customerDataController.lastName}"
+                                 required="true"
+                                 requiredMessage="Nazwisko nie może być puste"/>
+
+                    <h:outputText value="Email: "/>
+                    <p:inputText value="#{customerDataController.email}"
+                            required="true"
+                            requiredMessage="Adres email nie może być pusty"
+                            validator="EmailValidator"/>
+
+                    <h:outputText value="Profesja: "/>
+                    <p:selectOneMenu effect="puff"
+                                     value="#{customerDataController.profession}"
+                                     required="true"
+                                     requiredMessage="Profesja nie może być pusta">
+                        <f:selectItems value="#{customerDataController.professions}" />
+                    </p:selectOneMenu>
+
+                    <h:outputText value="Cv: "/>
+                    <p:fileUpload value="#{customerDataController.file}"
+                                  mode="simple"
+                                  validator="FileValidator" />
+                </h:panelGrid>
+
+                <p:growl id="message" autoUpdate="true" />
+
+                <h:commandButton value="Prześlij" action="#{customerDataController.storeData}" update="@form"/>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>
+

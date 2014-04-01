@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/resources/template/main.xhtml">
+
+    <ui:define name="head">
+        <h:outputStylesheet library="css" name="login.css" />
+    </ui:define>
+
+    <ui:define name="body">
+        <div id="filUploadForm">
+                <h:outputText value="Twoje zgłoszenie zostało przyjęte, powodzenia!"
+                              style="text-align: center; font-size: 20px;"/>
+            <p:growl id="message" autoUpdate="true" />
+        </div>
+    </ui:define>
+</ui:composition>
+
