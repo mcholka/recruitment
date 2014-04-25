@@ -8,7 +8,7 @@ public enum Archetype {
     FIRM,
     RESPONSIBILITY,
 
-    UNIWERSITY,
+    UNIVERSITY,
     POLYTECHNIC,
 
     TECHNICAL,

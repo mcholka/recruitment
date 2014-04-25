@@ -5,8 +5,11 @@
 --drop table if exists profession;
 --drop table if exists profession_knowledge;
 --drop table if exists summary;
+--drop table if exists filtereddata;
 
 alter table knowledge alter column id type bigint auto_increment;
+
+delete from knowledge;
 
 insert into knowledge (id, value, knowledgebasetype, archetype) values (1, 'junior php programmer','EXPERIENCE','POSITION');
 insert into knowledge (id, value, knowledgebasetype, archetype) values (2, 'php programmer','EXPERIENCE','POSITION');
@@ -66,25 +69,25 @@ insert into knowledge (id, value, knowledgebasetype, archetype) values (53, 'cod
 insert into knowledge (id, value, knowledgebasetype, archetype) values (54, 'programming','EXPERIENCE','RESPONSIBILITY');
 insert into knowledge (id, value, knowledgebasetype, archetype) values (55, 'continous integration','EXPERIENCE','RESPONSIBILITY');
 
-insert into knowledge (id, value, knowledgebasetype, archetype) values (56, 'Uniwersytet Warszawski','EDUCATION','UNIWERSITY');
-insert into knowledge (id, value, knowledgebasetype, archetype) values (57, 'Uniwersytet w Białymstoku','EDUCATION','UNIWERSITY');
-insert into knowledge (id, value, knowledgebasetype, archetype) values (58, 'Uniwersytet Gdański','EDUCATION','UNIWERSITY');
-insert into knowledge (id, value, knowledgebasetype, archetype) values (59, 'Uniwersytet im. Adama Mickiewicza w Poznaniu','EDUCATION','UNIWERSITY');
-insert into knowledge (id, value, knowledgebasetype, archetype) values (60, 'Uniwersytet Jagielloński w Krakowie','EDUCATION','UNIWERSITY');
-insert into knowledge (id, value, knowledgebasetype, archetype) values (61, 'Uniwersytet Łódzki','EDUCATION','UNIWERSITY');
-insert into knowledge (id, value, knowledgebasetype, archetype) values (62, 'Uniwersytet Marii Curie-Skłodowskiej w Lublinie','EDUCATION','UNIWERSITY');
-insert into knowledge (id, value, knowledgebasetype, archetype) values (63, 'Uniwersytet Mikołaja Kopernika w Toruniu','EDUCATION','UNIWERSITY');
-insert into knowledge (id, value, knowledgebasetype, archetype) values (64, 'Uniwersytet Opolski','EDUCATION','UNIWERSITY');
-insert into knowledge (id, value, knowledgebasetype, archetype) values (65, 'Uniwersytet Szczeciński','EDUCATION','UNIWERSITY');
-insert into knowledge (id, value, knowledgebasetype, archetype) values (66, 'Uniwersytet Śląski w Katowicach','EDUCATION','UNIWERSITY');
-insert into knowledge (id, value, knowledgebasetype, archetype) values (67, 'Uniwersytet Rzeszowski','EDUCATION','UNIWERSITY');
-insert into knowledge (id, value, knowledgebasetype, archetype) values (68, 'Uniwersytet Warmińsko-Mazurski w Olsztynie','EDUCATION','UNIWERSITY');
-insert into knowledge (id, value, knowledgebasetype, archetype) values (69, 'Uniwersytet Wrocławski','EDUCATION','UNIWERSITY');
-insert into knowledge (id, value, knowledgebasetype, archetype) values (70, 'Uniwersytet Kardynała Stefana Wyszyńskiego w Warszawie','EDUCATION','UNIWERSITY');
-insert into knowledge (id, value, knowledgebasetype, archetype) values (71, 'Uniwersytet Zielonogórski','EDUCATION','UNIWERSITY');
-insert into knowledge (id, value, knowledgebasetype, archetype) values (72, 'Uniwersytet Kazimierza Wielkiego w Bydgoszczy','EDUCATION','UNIWERSITY');
-insert into knowledge (id, value, knowledgebasetype, archetype) values (73, 'Uniwersytet Jana Kochanowskiego w Kielcach','EDUCATION','UNIWERSITY');
-insert into knowledge (id, value, knowledgebasetype, archetype) values (74, 'Uniwersytet Technologiczny w Szczecinie','EDUCATION','UNIWERSITY');
+insert into knowledge (id, value, knowledgebasetype, archetype) values (56, 'Uniwersytet Warszawski','EDUCATION','UNIVERSITY');
+insert into knowledge (id, value, knowledgebasetype, archetype) values (57, 'Uniwersytet w Białymstoku','EDUCATION','UNIVERSITY');
+insert into knowledge (id, value, knowledgebasetype, archetype) values (58, 'Uniwersytet Gdański','EDUCATION','UNIVERSITY');
+insert into knowledge (id, value, knowledgebasetype, archetype) values (59, 'Uniwersytet im. Adama Mickiewicza w Poznaniu','EDUCATION','UNIVERSITY');
+insert into knowledge (id, value, knowledgebasetype, archetype) values (60, 'Uniwersytet Jagielloński w Krakowie','EDUCATION','UNIVERSITY');
+insert into knowledge (id, value, knowledgebasetype, archetype) values (61, 'Uniwersytet Łódzki','EDUCATION','UNIVERSITY');
+insert into knowledge (id, value, knowledgebasetype, archetype) values (62, 'Uniwersytet Marii Curie-Skłodowskiej w Lublinie','EDUCATION','UNIVERSITY');
+insert into knowledge (id, value, knowledgebasetype, archetype) values (63, 'Uniwersytet Mikołaja Kopernika w Toruniu','EDUCATION','UNIVERSITY');
+insert into knowledge (id, value, knowledgebasetype, archetype) values (64, 'Uniwersytet Opolski','EDUCATION','UNIVERSITY');
+insert into knowledge (id, value, knowledgebasetype, archetype) values (65, 'Uniwersytet Szczeciński','EDUCATION','UNIVERSITY');
+insert into knowledge (id, value, knowledgebasetype, archetype) values (66, 'Uniwersytet Śląski w Katowicach','EDUCATION','UNIVERSITY');
+insert into knowledge (id, value, knowledgebasetype, archetype) values (67, 'Uniwersytet Rzeszowski','EDUCATION','UNIVERSITY');
+insert into knowledge (id, value, knowledgebasetype, archetype) values (68, 'Uniwersytet Warmińsko-Mazurski w Olsztynie','EDUCATION','UNIVERSITY');
+insert into knowledge (id, value, knowledgebasetype, archetype) values (69, 'Uniwersytet Wrocławski','EDUCATION','UNIVERSITY');
+insert into knowledge (id, value, knowledgebasetype, archetype) values (70, 'Uniwersytet Kardynała Stefana Wyszyńskiego w Warszawie','EDUCATION','UNIVERSITY');
+insert into knowledge (id, value, knowledgebasetype, archetype) values (71, 'Uniwersytet Zielonogórski','EDUCATION','UNIVERSITY');
+insert into knowledge (id, value, knowledgebasetype, archetype) values (72, 'Uniwersytet Kazimierza Wielkiego w Bydgoszczy','EDUCATION','UNIVERSITY');
+insert into knowledge (id, value, knowledgebasetype, archetype) values (73, 'Uniwersytet Jana Kochanowskiego w Kielcach','EDUCATION','UNIVERSITY');
+insert into knowledge (id, value, knowledgebasetype, archetype) values (74, 'Uniwersytet Technologiczny w Szczecinie','EDUCATION','UNIVERSITY');
 insert into knowledge (id, value, knowledgebasetype, archetype) values (75, 'Politechnika Warszawska','EDUCATION','POLYTECHNIC');
 insert into knowledge (id, value, knowledgebasetype, archetype) values (76, 'Politechnika Białostocka','EDUCATION','POLYTECHNIC');
 insert into knowledge (id, value, knowledgebasetype, archetype) values (77, 'Akademia Techniczno-Humanistyczna w Bielsku -Białej','EDUCATION','POLYTECHNIC');
@@ -128,7 +131,7 @@ insert into knowledge (id, value, knowledgebasetype, archetype) values (113, 'to
 insert into knowledge (id, value, knowledgebasetype, archetype) values (114, 'glassfish','SKILLS','TECHNICAL');
 insert into knowledge (id, value, knowledgebasetype, archetype) values (115, 'websphere','SKILLS','TECHNICAL');
 insert into knowledge (id, value, knowledgebasetype, archetype) values (116, 'maven','SKILLS','TECHNICAL');
-insert into knowledge (id, value, knowledgebasetype, archetype) values (117, 'sql','SKILLS','TECHNICAL');
+
 insert into knowledge (id, value, knowledgebasetype, archetype) values (118, 'posgresql','SKILLS','TECHNICAL');
 insert into knowledge (id, value, knowledgebasetype, archetype) values (119, 'mysql','SKILLS','TECHNICAL');
 insert into knowledge (id, value, knowledgebasetype, archetype) values (120, 'sql','SKILLS','TECHNICAL');
@@ -160,6 +163,10 @@ insert into knowledge (id, value, knowledgebasetype, archetype) values (143, 'ru
 insert into knowledge (id, value, knowledgebasetype, archetype) values (144, 'kitesurfing','INTEREST','OTHER');
 insert into knowledge (id, value, knowledgebasetype, archetype) values (145, 'windsurfing','INTEREST','OTHER');
 insert into knowledge (id, value, knowledgebasetype, archetype) values (146, 'football','INTEREST','OTHER');
+
+delete from customerdata;
+delete from profession_knowledge;
+delete from profession;
 
 insert into profession (id, createtime, description) values ('JAVA', now(), 'Programista Java');
 insert into profession (id, createtime, description) values ('ADMIN', now(), 'Administrator Sieci');
@@ -273,7 +280,7 @@ insert into profession_knowledge (profession_id, knowledgelist_id) values ('JAVA
 insert into profession_knowledge (profession_id, knowledgelist_id) values ('JAVA', 114 );
 insert into profession_knowledge (profession_id, knowledgelist_id) values ('JAVA', 115 );
 insert into profession_knowledge (profession_id, knowledgelist_id) values ('JAVA', 116 );
-insert into profession_knowledge (profession_id, knowledgelist_id) values ('JAVA', 117 );
+
 insert into profession_knowledge (profession_id, knowledgelist_id) values ('JAVA', 118 );
 insert into profession_knowledge (profession_id, knowledgelist_id) values ('JAVA', 119 );
 insert into profession_knowledge (profession_id, knowledgelist_id) values ('JAVA', 120 );
