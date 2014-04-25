@@ -13,7 +13,7 @@ import java.io.IOException;
 public class RecruitmentUtils {
     private static final Logger logger = Logger.getLogger(RecruitmentUtils.class);
 
-    public static final String FILE_STORE_PATH = "C:\\workspace\\OutputFiles\\";
+    public static final String FILE_STORE_PATH = "C:\\temp\\OutputFiles\\";
     public static final String REQUIRED_FILE_FORMAT = "application/pdf";
     public static final String DEFAULT_FILE_SUFFIX = ".pdf";
 

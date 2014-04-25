@@ -1,6 +1,6 @@
 package com.recruitment.entity;
 
-import com.recruitment.common.Status;
+import com.recruitment.common.ProcessStatus;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,7 +13,7 @@ import java.util.Date;
 @NamedQueries({
         @NamedQuery(name = "CustomerData.getCustomersForDataExtract", query = "" +
                 "SELECT i FROM CustomerData i " +
-                "WHERE i.status = :status"
+                "WHERE i.processStatus = :status"
         )
 })
 public class CustomerData implements Serializable {
@@ -35,10 +35,13 @@ public class CustomerData implements Serializable {
     @ManyToOne
     private Profession profession;
 
-    @Enumerated(EnumType.STRING)
-    private Status status;
+    @OneToOne
+    private ExtractedData extractedData;
 
-    @Column(length = 1000000)
+    @Enumerated(EnumType.STRING)
+    private ProcessStatus processStatus;
+
+    @Column(length = 10000000)
     private byte[] storedCv;
 
     private String email;
@@ -49,7 +52,7 @@ public class CustomerData implements Serializable {
     public void init(){
         createTime = new Date();
         lastModifiedTime = new Date();
-        status = Status.NEW;
+        processStatus = ProcessStatus.NEW;
     }
 
     @PreUpdate
@@ -97,12 +100,12 @@ public class CustomerData implements Serializable {
         this.profession = profession;
     }
 
-    public Status getStatus() {
-        return status;
+    public ProcessStatus getProcessStatus() {
+        return processStatus;
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setProcessStatus(ProcessStatus processStatus) {
+        this.processStatus = processStatus;
     }
 
     public byte[] getStoredCv() {
@@ -128,5 +131,13 @@ public class CustomerData implements Serializable {
 
     public String getFileName() {
         return fileName;
+    }
+
+    public ExtractedData getExtractedData() {
+        return extractedData;
+    }
+
+    public void setExtractedData(ExtractedData extractedData) {
+        this.extractedData = extractedData;
     }
 }

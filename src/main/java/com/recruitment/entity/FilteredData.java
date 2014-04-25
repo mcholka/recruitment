@@ -4,19 +4,13 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- * Created by mcholka on 2014-03-26. Enjoy!
+ * Created by mcholka on 2014-04-25. Enjoy!
  */
 @Entity
-@NamedQueries({
-        @NamedQuery(name = "ExtractedData.findExtractedDataToFilter", query = "" +
-                "SELECT i FROM ExtractedData i " +
-                "WHERE i.customerData.processStatus = :status"
-        )
-})
-public class ExtractedData implements Serializable{
+public class FilteredData implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "extractedDataGenerator")
-    @SequenceGenerator(name = "extractedDataGenerator", sequenceName = "extracteddata_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "filteredDataGenerator")
+    @SequenceGenerator(name = "filteredDataGenerator", sequenceName = "filtereddata_id_seq", allocationSize = 1)
     private Long id;
 
     @OneToOne

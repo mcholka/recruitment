@@ -3,6 +3,7 @@ package com.recruitment.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by mcholka on 2014-03-25. Enjoy!
@@ -21,6 +22,9 @@ public class Profession implements Serializable {
     private String description;
 
     private Date createTime;
+
+    @ManyToMany
+    private List<Knowledge> knowledgeList;
 
     @PrePersist
     public void prePersist(){
@@ -49,5 +53,13 @@ public class Profession implements Serializable {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public List<Knowledge> getKnowledgeList() {
+        return knowledgeList;
+    }
+
+    public void setKnowledgeList(List<Knowledge> knowledgeList) {
+        this.knowledgeList = knowledgeList;
     }
 }

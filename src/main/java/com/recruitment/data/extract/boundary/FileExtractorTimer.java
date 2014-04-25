@@ -24,15 +24,15 @@ public class FileExtractorTimer {
     @Inject
     private CustomerExtractFacade customerExtractFacade;
 
-    @Schedule(persistent = false, hour = "*", minute = "*/1", second = "0")
-    public void extractDocuments(){
-        logger.info("Start FileExtractorTimer work");
+    @Schedule(persistent = false, hour = "*", minute = "*/1")
+    public synchronized void extractDocuments(){
+        logger.info("FileExtractorTimer start");
         List<CustomerData> customers = getCustomersToExtractData();
 
         for(CustomerData customerData : customers){
             extractData(customerData);
         }
-        logger.info("End FileExtractorTimer work");
+        logger.info("FileExtractorTimer end");
     }
 
     private List<CustomerData> getCustomersToExtractData() {

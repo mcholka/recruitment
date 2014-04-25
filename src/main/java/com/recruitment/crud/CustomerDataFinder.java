@@ -1,6 +1,6 @@
 package com.recruitment.crud;
 
-import com.recruitment.common.Status;
+import com.recruitment.common.ProcessStatus;
 import com.recruitment.entity.CustomerData;
 import org.apache.log4j.Logger;
 
@@ -22,7 +22,7 @@ private static final Logger logger = Logger.getLogger(CustomerDataFinder.class);
 
     public List<CustomerData> getCustomersForDataExtract(){
         Query query = entityManager.createNamedQuery("CustomerData.getCustomersForDataExtract");
-        query.setParameter("status", Status.NEW);
+        query.setParameter("status", ProcessStatus.NEW);
 
         @SuppressWarnings("unchecked")
         List<CustomerData> customers = query.getResultList();

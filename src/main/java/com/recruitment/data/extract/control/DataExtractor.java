@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * Created by mcholka on 2014-03-27. Enjoy!
@@ -27,6 +28,9 @@ public class DataExtractor {
 
     private String tryToFindValue(String document, String interestingValue) {
         logger.info("Try to find value: " + interestingValue);
+
+        checkWithWhiteSpaces(document, interestingValue);
+
         if(document.contains(interestingValue)){
             logger.info("Found without any changes! Value: " + interestingValue);
             return interestingValue;
@@ -42,8 +46,16 @@ public class DataExtractor {
             logger.info("Found before formatted! Value: " + interestingValue);
             return interestingValue;
         }
-        logger.info("Value not found...");
+        logger.info("Value not found... :(");
         return null;
+    }
+
+    private void checkWithWhiteSpaces(String document, String interestingValue) {
+        if(Pattern.compile("(^|\\s)" + interestingValue + "($|\\s)", Pattern.CASE_INSENSITIVE).matcher(document).find()){
+            logger.info("Document contains value: " + interestingValue + " with white spaces");
+        } else {
+            logger.info("Document doesn't contain the value: " + interestingValue + " with white spaces");
+        }
     }
 
 }

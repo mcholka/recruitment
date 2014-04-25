@@ -6,7 +6,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import javax.validation.constraints.NotNull;
 
 /**
  * Created by mcholka on 2014-03-25. Enjoy!

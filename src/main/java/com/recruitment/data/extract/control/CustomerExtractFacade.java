@@ -1,7 +1,7 @@
 package com.recruitment.data.extract.control;
 
 import com.recruitment.common.KnowledgeCommon;
-import com.recruitment.common.Status;
+import com.recruitment.common.ProcessStatus;
 import com.recruitment.crud.StorageManager;
 import com.recruitment.entity.CustomerData;
 import com.recruitment.entity.ExtractedData;
@@ -17,7 +17,7 @@ public class CustomerExtractFacade {
     @Inject
     CustomerDataExtractor customerDataExtractor;
     @Inject
-    ExtractedDataMapper extractedDataMapper;
+    KnowledgeCommonMapper knowledgeCommonMapper;
     @Inject
     StorageManager storageManager;
 
@@ -34,7 +34,7 @@ public class CustomerExtractFacade {
     }
 
     private ExtractedData mappingToExtractedData(KnowledgeCommon extractedKnowledge, CustomerData customerData) {
-        return extractedDataMapper.mappingToExtractedData(extractedKnowledge, customerData);
+        return knowledgeCommonMapper.mappingToExtractedData(extractedKnowledge, customerData);
     }
 
     private void store(ExtractedData extractedData) {
@@ -42,6 +42,6 @@ public class CustomerExtractFacade {
     }
 
     private void updateCustomerStatus(CustomerData customerData) {
-        customerData.setStatus(Status.EXTRACTED);
+        customerData.setProcessStatus(ProcessStatus.EXTRACTED);
     }
 }

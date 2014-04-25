@@ -3,6 +3,7 @@ package com.recruitment.data.extract.control;
 import com.recruitment.common.KnowledgeBaseType;
 import com.recruitment.common.KnowledgeCommon;
 import com.recruitment.crud.KnowledgeFinder;
+import org.apache.log4j.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -12,6 +13,7 @@ import java.util.List;
  * Created by mcholka on 2014-03-27. Enjoy!
  */
 public class KnowledgeLoader {
+    private static final Logger logger = Logger.getLogger(KnowledgeLoader.class);
 
     @Inject
     KnowledgeFinder knowledgeFinder;
@@ -20,6 +22,7 @@ public class KnowledgeLoader {
 
     @PostConstruct
     public void init(){
+        logger.info("init KnowledgeLoader");
         knowledgeCommon = new KnowledgeCommon();
         knowledgeCommon.setExperience(knowledgeFinder.getKnowledgeByBaseType(KnowledgeBaseType.EXPERIENCE));
         knowledgeCommon.setEducation(knowledgeFinder.getKnowledgeByBaseType(KnowledgeBaseType.EDUCATION));

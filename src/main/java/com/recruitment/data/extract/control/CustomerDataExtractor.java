@@ -44,6 +44,7 @@ public class CustomerDataExtractor {
         String pdf = writer.toString();
         writer.flush();
         writer.close();
+        pdDocument.close();
         inputStream.close();
         return pdf;
     }
