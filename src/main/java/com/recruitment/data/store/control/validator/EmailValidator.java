@@ -1,7 +1,5 @@
 package com.recruitment.data.store.control.validator;
 
-import com.recruitment.common.RecruitmentUtils;
-
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;

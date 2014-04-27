@@ -16,8 +16,8 @@ import java.util.List;
  */
 @Singleton
 @Startup
-public class ExtractedDataTimer {
-    private static final Logger logger = Logger.getLogger(ExtractedDataTimer.class);
+public class DataFilterTimer {
+    private static final Logger logger = Logger.getLogger(DataFilterTimer.class);
 
     @Inject
     private ExtractedDataFinder extractedDataFinder;
@@ -26,12 +26,12 @@ public class ExtractedDataTimer {
 
     @Schedule(persistent = false, hour = "*", minute = "*/1", second = "20")
     public synchronized void filterData(){
-        logger.info("ExtractedDataTimer start");
+        logger.info("DataFilterTimer start");
         List<ExtractedData> extractedDataList = getExtractedDataToFilter();
         for(ExtractedData extractedData : extractedDataList){
             filter(extractedData);
         }
-        logger.info("ExtractedDataTimer end");
+        logger.info("DataFilterTimer end");
     }
 
     private List<ExtractedData> getExtractedDataToFilter() {
