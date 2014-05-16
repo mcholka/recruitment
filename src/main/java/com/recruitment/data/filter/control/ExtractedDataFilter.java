@@ -47,7 +47,7 @@ public class ExtractedDataFilter {
         List<String> filteredValues = new ArrayList<>();
         for(String value : values) {
             for(Knowledge knowledge : professionKnowledge){
-                if(value.equals(knowledge.getValue())){
+                if(value.contains(knowledge.getValue())){
                     filteredValues.add(value);
                     break;
                 }

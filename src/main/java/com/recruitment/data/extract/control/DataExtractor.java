@@ -96,7 +96,7 @@ public class DataExtractor {
             logger.info("Value not found even without prefixes, skip founding with prefixes");
             return false;
         }
-
+logger.info("Check with " + knowledge.getAffixes().size() + " affixes");
         String toFound = knowledge.getValue();
         for(Affix affix : knowledge.getAffixes()) {
             boolean required = affix.isRequired();
@@ -114,12 +114,12 @@ public class DataExtractor {
                 foundValue = null;
                 return false;
             }
-            if(required && AffixType.PREFIX.equals(affix.getType())){
+            if(valueFound && AffixType.PREFIX.equals(affix.getType())){
                 logger.info("Found prefix");
                 prefixFound = true;
                 continue;
             }
-            if(required && AffixType.SUFFIX.equals(affix.getType())){
+            if(valueFound && AffixType.SUFFIX.equals(affix.getType())){
                 logger.info("Found suffix");
                 suffixFound = true;
                 continue;
@@ -150,9 +150,9 @@ public class DataExtractor {
 
     private String remove(String value, Affix affix) {
         if(AffixType.PREFIX.equals(affix.getType())){
-            return value.replaceAll(affix.getValue() + " ", "");
+            return value.replaceAll(affix.getValue() + "\\s", "");
         } else if (AffixType.SUFFIX.equals(affix.getType())){
-            return value.replaceAll(" " + affix.getValue(), "");
+            return value.replaceAll("\\s" + affix.getValue(), "");
         } else {
             throw new RuntimeException("Unrecognized affix " + affix.getValue() + " with type " + affix.getType());
         }
