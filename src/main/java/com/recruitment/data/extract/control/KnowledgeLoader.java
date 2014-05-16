@@ -1,8 +1,8 @@
 package com.recruitment.data.extract.control;
 
 import com.recruitment.common.KnowledgeBaseType;
-import com.recruitment.common.KnowledgeCommon;
 import com.recruitment.crud.KnowledgeFinder;
+import com.recruitment.entity.Knowledge;
 import org.apache.log4j.Logger;
 
 import javax.annotation.PostConstruct;
@@ -18,31 +18,33 @@ public class KnowledgeLoader {
     @Inject
     KnowledgeFinder knowledgeFinder;
 
-    private KnowledgeCommon knowledgeCommon;
+    private List<Knowledge> experienceList;
+    private List<Knowledge> educationList;
+    private List<Knowledge> skillList;
+    private List<Knowledge> interestList;
 
     @PostConstruct
     public void init(){
         logger.info("init KnowledgeLoader");
-        knowledgeCommon = new KnowledgeCommon();
-        knowledgeCommon.setExperience(knowledgeFinder.getKnowledgeByBaseType(KnowledgeBaseType.EXPERIENCE));
-        knowledgeCommon.setEducation(knowledgeFinder.getKnowledgeByBaseType(KnowledgeBaseType.EDUCATION));
-        knowledgeCommon.setSkills(knowledgeFinder.getKnowledgeByBaseType(KnowledgeBaseType.SKILLS));
-        knowledgeCommon.setInterest(knowledgeFinder.getKnowledgeByBaseType(KnowledgeBaseType.INTEREST));
+        experienceList = knowledgeFinder.getKnowledgeByBaseType(KnowledgeBaseType.EXPERIENCE);
+        educationList = knowledgeFinder.getKnowledgeByBaseType(KnowledgeBaseType.EDUCATION);
+        skillList = knowledgeFinder.getKnowledgeByBaseType(KnowledgeBaseType.SKILLS);
+        interestList = knowledgeFinder.getKnowledgeByBaseType(KnowledgeBaseType.INTEREST);
     }
 
-    public List<String> getAllExperience() {
-        return knowledgeCommon.getExperience();
+    public List<Knowledge> getExperienceList() {
+        return experienceList;
     }
 
-    public List<String> getAllEducation() {
-        return knowledgeCommon.getEducation();
+    public List<Knowledge> getEducationList() {
+        return educationList;
     }
 
-    public List<String> getAllSkills() {
-        return knowledgeCommon.getSkills();
+    public List<Knowledge> getSkillList() {
+        return skillList;
     }
 
-    public List<String> getAllInterest() {
-        return knowledgeCommon.getInterest();
+    public List<Knowledge> getInterestList() {
+        return interestList;
     }
 }

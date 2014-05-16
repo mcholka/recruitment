@@ -9,7 +9,7 @@ import java.util.List;
 public enum KnowledgeBaseType {
 
     EXPERIENCE(Arrays.asList(Archetype.POSITION, Archetype.FIRM, Archetype.RESPONSIBILITY)),
-    EDUCATION(Arrays.asList(Archetype.UNIVERSITY, Archetype.POLYTECHNIC)),
+    EDUCATION(Arrays.asList(Archetype.UNIWERSITY, Archetype.POLYTECHNIC)),
     SKILLS(Arrays.asList(Archetype.TECHNICAL, Archetype.OTHER)),
     INTEREST(Arrays.asList(Archetype.OTHER));
 

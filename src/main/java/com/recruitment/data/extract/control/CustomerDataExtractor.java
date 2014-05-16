@@ -51,10 +51,10 @@ public class CustomerDataExtractor {
 
     private KnowledgeCommon tryToFoundDataInDocument(String document) {
         KnowledgeCommon customerKnowledge = new KnowledgeCommon();
-        customerKnowledge.setExperience(dataExtractor.extractData(document, knowledgeLoader.getAllExperience()));
-        customerKnowledge.setEducation(dataExtractor.extractData(document, knowledgeLoader.getAllEducation()));
-        customerKnowledge.setSkills(dataExtractor.extractData(document, knowledgeLoader.getAllSkills()));
-        customerKnowledge.setInterest(dataExtractor.extractData(document, knowledgeLoader.getAllInterest()));
+        customerKnowledge.setExperience(dataExtractor.extractData(document, knowledgeLoader.getExperienceList()));
+        customerKnowledge.setEducation(dataExtractor.extractData(document, knowledgeLoader.getEducationList()));
+        customerKnowledge.setSkills(dataExtractor.extractData(document, knowledgeLoader.getSkillList()));
+        customerKnowledge.setInterest(dataExtractor.extractData(document, knowledgeLoader.getInterestList()));
         return customerKnowledge;
     }
 }

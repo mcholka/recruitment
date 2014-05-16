@@ -13,14 +13,12 @@ import java.io.IOException;
  * Created by mcholka on 2014-03-27. Enjoy!
  */
 public class CustomerExtractFacade {
-
     @Inject
     CustomerDataExtractor customerDataExtractor;
     @Inject
     KnowledgeCommonMapper knowledgeCommonMapper;
     @Inject
     StorageManager storageManager;
-
 
     public void processPerson(CustomerData customerData) throws IOException {
         KnowledgeCommon extractedKnowledge = extractData(customerData);

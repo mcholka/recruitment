@@ -1,6 +1,7 @@
 package com.recruitment.crud;
 
 import com.recruitment.common.KnowledgeBaseType;
+import com.recruitment.entity.Knowledge;
 import org.apache.log4j.Logger;
 
 import javax.ejb.Stateless;
@@ -19,11 +20,11 @@ public class KnowledgeFinder {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public List<String> getKnowledgeByBaseType(KnowledgeBaseType baseType){
+    public List<Knowledge> getKnowledgeByBaseType(KnowledgeBaseType baseType){
         Query query = entityManager.createNamedQuery("Knowledge.getKnowledgeByBaseType");
         query.setParameter("baseType", baseType);
         @SuppressWarnings("unchecked")
-        List<String> valueList = query.getResultList();
+        List<Knowledge> valueList = query.getResultList();
         logger.info("Found " + valueList.size() + " values by type: " + baseType);
         return valueList;
     }

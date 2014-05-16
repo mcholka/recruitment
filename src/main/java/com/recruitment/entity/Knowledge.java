@@ -5,13 +5,17 @@ import com.recruitment.common.KnowledgeBaseType;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by mcholka on 2014-03-26. Enjoy!
  */
 @Entity
+@Table(uniqueConstraints =  {
+        @UniqueConstraint( columnNames = {"knowledgeBaseType", "value"})
+})
 @NamedQueries({
-        @NamedQuery(name = "Knowledge.getKnowledgeByBaseType", query = "SELECT i.value FROM Knowledge i WHERE i.knowledgeBaseType = :baseType")
+        @NamedQuery(name = "Knowledge.getKnowledgeByBaseType", query = "SELECT i FROM Knowledge i WHERE i.knowledgeBaseType = :baseType")
 })
 public class Knowledge implements Serializable {
     @Id
@@ -27,12 +31,23 @@ public class Knowledge implements Serializable {
     @Enumerated(EnumType.STRING)
     private Archetype archetype;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Affix> affixes;
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public List<Affix> getAffixes() {
+        return affixes;
+    }
+
+    public void setAffixes(List<Affix> affixes) {
+        this.affixes = affixes;
     }
 
     public String getValue() {
