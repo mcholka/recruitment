@@ -1,17 +1,13 @@
 package com.recruitment.data.filter.control;
 
-import com.recruitment.common.KnowledgeBaseType;
-import com.recruitment.common.KnowledgeCommon;
+import com.recruitment.common.KnowledgeHolder;
 import com.recruitment.common.ProcessStatus;
-import com.recruitment.common.RecruitmentUtils;
 import com.recruitment.crud.StorageManager;
 import com.recruitment.data.extract.control.KnowledgeCommonMapper;
 import com.recruitment.entity.*;
 import org.apache.log4j.Logger;
 
 import javax.inject.Inject;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 
@@ -31,15 +27,11 @@ public class ExtractedDataFilterFacade {
     public void matchExtractedDataToProfession(ExtractedData extractedData) {
         logger.info("Filtering extracted data for customer: " + extractedData.getCustomerData().getId());
         List<Knowledge> knowledgeFromProfession = getKnowledgeFromProfession(extractedData);
-        KnowledgeCommon knowledgeCommon = processMatch(knowledgeFromProfession, extractedData);
+        KnowledgeHolder knowledgeHolder = processMatch(knowledgeFromProfession, extractedData);
 
-        logger.info("\nFiltered: " +
-                "\nExperience data: " + knowledgeCommon.getExperience().size() +
-                "\nEducation data: " + knowledgeCommon.getEducation().size() +
-                "\nSkills data: " + knowledgeCommon.getSkills().size() +
-                "\nInterest data: " + knowledgeCommon.getInterest().size());
+        logger.info("\nFiltered data:\n" + knowledgeHolder.toString());
 
-        FilteredData filteredData = mapping(knowledgeCommon, extractedData);
+        FilteredData filteredData = mapping(knowledgeHolder, extractedData);
         persist(filteredData);
         updateCustomerStatus(extractedData.getCustomerData());
         logger.info("Customer filtered");
@@ -51,12 +43,12 @@ public class ExtractedDataFilterFacade {
         return profession.getKnowledgeList();
     }
 
-    private KnowledgeCommon processMatch(List<Knowledge> knowledgeFromProfession, ExtractedData extractedData) {
+    private KnowledgeHolder processMatch(List<Knowledge> knowledgeFromProfession, ExtractedData extractedData) {
         return extractedDataFilter.filter(knowledgeFromProfession, extractedData);
     }
 
-    private FilteredData mapping(KnowledgeCommon knowledgeCommon, ExtractedData extractedData) {
-        return knowledgeCommonMapper.mappingToFilteredData(knowledgeCommon, extractedData.getCustomerData());
+    private FilteredData mapping(KnowledgeHolder knowledgeHolder, ExtractedData extractedData) {
+        return knowledgeCommonMapper.mappingToFilteredData(knowledgeHolder, extractedData.getCustomerData());
     }
 
     private void persist(FilteredData filteredData) {

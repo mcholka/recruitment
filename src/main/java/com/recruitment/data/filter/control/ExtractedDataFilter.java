@@ -1,11 +1,14 @@
 package com.recruitment.data.filter.control;
 
-import com.recruitment.common.KnowledgeBaseType;
-import com.recruitment.common.KnowledgeCommon;
+import com.recruitment.common.KnowledgeHolder;
 import com.recruitment.common.RecruitmentUtils;
+import com.recruitment.crud.ArchetypeFinder;
+import com.recruitment.crud.KnowledgeFinder;
+import com.recruitment.entity.Archetype;
 import com.recruitment.entity.ExtractedData;
 import com.recruitment.entity.Knowledge;
 
+import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -15,28 +18,41 @@ import java.util.List;
  */
 public class ExtractedDataFilter {
 
-    public KnowledgeCommon filter(List<Knowledge> knowledgeFromProfession, ExtractedData extractedData){
-        KnowledgeCommon knowledgeCommon = new KnowledgeCommon();
-        knowledgeCommon.setExperience(filterData(KnowledgeBaseType.EXPERIENCE, knowledgeFromProfession, extractedData.getExperience()));
-        knowledgeCommon.setEducation(filterData(KnowledgeBaseType.EDUCATION, knowledgeFromProfession, extractedData.getEducation()));
-        knowledgeCommon.setSkills(filterData(KnowledgeBaseType.SKILLS, knowledgeFromProfession, extractedData.getSkills()));
-        knowledgeCommon.setInterest(filterData(KnowledgeBaseType.INTEREST, knowledgeFromProfession, extractedData.getInterest()));
-        return knowledgeCommon;
+    @Inject
+    KnowledgeFinder knowledgeFinder;
+    @Inject
+    ArchetypeFinder archetypeFinder;
+
+    public KnowledgeHolder filter(List<Knowledge> knowledgeFromProfession, ExtractedData extractedData){
+        KnowledgeHolder knowledgeHolder = new KnowledgeHolder();
+        List<String> foundValues;
+        List<Archetype> archetypes = getAllArchetypes();
+        for(Archetype archetype : archetypes){
+            foundValues = filterData(archetype, knowledgeFromProfession, extractedData.getValue());
+            for(String value : foundValues){
+                knowledgeHolder.appendFullProcessed(value);
+            }
+        }
+        return knowledgeHolder;
     }
 
-    private List<String> filterData(KnowledgeBaseType knowledgeBaseType, List<Knowledge> knowledgeFromProfession, String value) {
+    private List<Archetype> getAllArchetypes() {
+        return archetypeFinder.findAllArchetypes();
+    }
+
+    private List<String> filterData(Archetype archetype, List<Knowledge> knowledgeFromProfession, String value) {
         if(RecruitmentUtils.emptyString(value)){
             return Collections.emptyList();
         }
         String[] values = value.split(";");
-        List<Knowledge> professionKnowledge = filterProfessionValuesByBaseType(knowledgeBaseType, knowledgeFromProfession);
+        List<Knowledge> professionKnowledge = filterProfessionValuesByArchetype(archetype, knowledgeFromProfession);
         return filterExtractedCustomerValues(values, professionKnowledge);
     }
 
-    private List<Knowledge> filterProfessionValuesByBaseType(KnowledgeBaseType knowledgeBaseType, List<Knowledge> knowledgeFromProfession) {
+    private List<Knowledge> filterProfessionValuesByArchetype(Archetype archetype, List<Knowledge> knowledgeFromProfession) {
         List<Knowledge> professionKnowledge = new ArrayList<>();
         for(Knowledge knowledge : knowledgeFromProfession){
-            if(knowledgeBaseType.equals(knowledge.getKnowledgeBaseType())){
+            if(archetype.equals(knowledge.getArchetype())){
                 professionKnowledge.add(knowledge);
             }
         }
@@ -47,12 +63,18 @@ public class ExtractedDataFilter {
         List<String> filteredValues = new ArrayList<>();
         for(String value : values) {
             for(Knowledge knowledge : professionKnowledge){
-                if(value.contains(knowledge.getValue())){
+                if(contains(value, knowledge)){
                     filteredValues.add(value);
                     break;
                 }
             }
         }
         return filteredValues;
+    }
+
+    private boolean contains(String value, Knowledge knowledge) {
+        return value.contains(knowledge.getValue()) &&
+                value.contains(knowledge.getKnowledgeBaseType().getId()) &&
+                value.contains(knowledge.getArchetype().getId());
     }
 }

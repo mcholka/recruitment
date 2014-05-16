@@ -1,6 +1,6 @@
 package com.recruitment.data.extract.control;
 
-import com.recruitment.common.KnowledgeCommon;
+import com.recruitment.common.KnowledgeHolder;
 import com.recruitment.common.ProcessStatus;
 import com.recruitment.crud.StorageManager;
 import com.recruitment.entity.CustomerData;
@@ -21,17 +21,17 @@ public class CustomerExtractFacade {
     StorageManager storageManager;
 
     public void processPerson(CustomerData customerData) throws IOException {
-        KnowledgeCommon extractedKnowledge = extractData(customerData);
+        KnowledgeHolder extractedKnowledge = extractData(customerData);
         ExtractedData extractedData = mappingToExtractedData(extractedKnowledge, customerData);
         store(extractedData);
         updateCustomerStatus(customerData);
     }
 
-    private KnowledgeCommon extractData(CustomerData customerData) throws IOException {
+    private KnowledgeHolder extractData(CustomerData customerData) throws IOException {
         return customerDataExtractor.extractData(customerData);
     }
 
-    private ExtractedData mappingToExtractedData(KnowledgeCommon extractedKnowledge, CustomerData customerData) {
+    private ExtractedData mappingToExtractedData(KnowledgeHolder extractedKnowledge, CustomerData customerData) {
         return knowledgeCommonMapper.mappingToExtractedData(extractedKnowledge, customerData);
     }
 

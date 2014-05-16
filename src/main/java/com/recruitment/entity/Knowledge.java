@@ -1,10 +1,8 @@
 package com.recruitment.entity;
 
-import com.recruitment.common.Archetype;
-import com.recruitment.common.KnowledgeBaseType;
-
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -15,7 +13,8 @@ import java.util.List;
         @UniqueConstraint( columnNames = {"knowledgeBaseType", "value"})
 })
 @NamedQueries({
-        @NamedQuery(name = "Knowledge.getKnowledgeByBaseType", query = "SELECT i FROM Knowledge i WHERE i.knowledgeBaseType = :baseType")
+        @NamedQuery(name = "Knowledge.getKnowledgeByBaseType", query = "SELECT i FROM Knowledge i WHERE i.knowledgeBaseType.id = :baseType"),
+        @NamedQuery(name = "Knowledge.getKnowledgeByArchetype", query = "SELECT i FROM Knowledge i WHERE i.archetype  = :archetype")
 })
 public class Knowledge implements Serializable {
     @Id
@@ -25,14 +24,16 @@ public class Knowledge implements Serializable {
 
     private String value;
 
-    @Enumerated(EnumType.STRING)
+    @ManyToOne
     private KnowledgeBaseType knowledgeBaseType;
 
-    @Enumerated(EnumType.STRING)
+    @ManyToOne
     private Archetype archetype;
 
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Affix> affixes;
+
+    private BigDecimal points;
 
     public Long getId() {
         return id;
@@ -66,14 +67,19 @@ public class Knowledge implements Serializable {
         this.knowledgeBaseType = knowledgeBaseType;
     }
 
+    public BigDecimal getPoints() {
+        return points;
+    }
+
+    public void setPoints(BigDecimal points) {
+        this.points = points;
+    }
+
     public Archetype getArchetype() {
         return archetype;
     }
 
     public void setArchetype(Archetype archetype) {
-        if(knowledgeBaseType == null || !knowledgeBaseType.getArchetypes().contains(archetype)){
-            throw new IllegalArgumentException("Archetype: " + archetype + " can't be stored to knowledge with base type: " + knowledgeBaseType);
-        }
         this.archetype = archetype;
     }
 }

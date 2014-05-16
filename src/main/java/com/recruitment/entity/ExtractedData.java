@@ -2,6 +2,7 @@ package com.recruitment.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by mcholka on 2014-03-26. Enjoy!
@@ -22,11 +23,14 @@ public class ExtractedData implements Serializable{
     @OneToOne
     private CustomerData customerData;
 
-    private String experience;
-    private String education;
-    private String skills;
-    private String interest;
+    private String value;
 
+    private Date createTime;
+
+    @PrePersist
+    public void prePersist(){
+        createTime = new Date();
+    }
     public Long getId() {
         return id;
     }
@@ -43,35 +47,15 @@ public class ExtractedData implements Serializable{
         this.customerData = customerData;
     }
 
-    public String getExperience() {
-        return experience;
+    public String getValue() {
+        return value;
     }
 
-    public void setExperience(String experience) {
-        this.experience = experience;
+    public void setValue(String value) {
+        this.value = value;
     }
 
-    public String getEducation() {
-        return education;
-    }
-
-    public void setEducation(String education) {
-        this.education = education;
-    }
-
-    public String getSkills() {
-        return skills;
-    }
-
-    public void setSkills(String skills) {
-        this.skills = skills;
-    }
-
-    public String getInterest() {
-        return interest;
-    }
-
-    public void setInterest(String interest) {
-        this.interest = interest;
+    public Date getCreateTime() {
+        return createTime;
     }
 }

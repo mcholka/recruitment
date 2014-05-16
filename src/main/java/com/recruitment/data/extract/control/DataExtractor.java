@@ -42,6 +42,7 @@ public class DataExtractor {
 
     private boolean tryToFindValue(String document, Knowledge knowledge) {
         foundValue = null;
+
         if(knowledge.getAffixes().isEmpty()){
             return findWithoutAffixes(document, knowledge);
         } else {
@@ -96,7 +97,7 @@ public class DataExtractor {
             logger.info("Value not found even without prefixes, skip founding with prefixes");
             return false;
         }
-logger.info("Check with " + knowledge.getAffixes().size() + " affixes");
+        logger.info("Check with " + knowledge.getAffixes().size() + " affixes");
         String toFound = knowledge.getValue();
         for(Affix affix : knowledge.getAffixes()) {
             boolean required = affix.isRequired();

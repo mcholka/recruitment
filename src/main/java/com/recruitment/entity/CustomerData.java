@@ -38,6 +38,12 @@ public class CustomerData implements Serializable {
     @OneToOne
     private ExtractedData extractedData;
 
+    @OneToOne
+    private FilteredData filteredData;
+
+    @OneToOne
+    private Summary summary;
+
     @Enumerated(EnumType.STRING)
     private ProcessStatus processStatus;
 
@@ -139,5 +145,21 @@ public class CustomerData implements Serializable {
 
     public void setExtractedData(ExtractedData extractedData) {
         this.extractedData = extractedData;
+    }
+
+    public Summary getSummary() {
+        return summary;
+    }
+
+    public void setSummary(Summary summary) {
+        this.summary = summary;
+    }
+
+    public FilteredData getFilteredData() {
+        return filteredData;
+    }
+
+    public void setFilteredData(FilteredData filteredData) {
+        this.filteredData = filteredData;
     }
 }
