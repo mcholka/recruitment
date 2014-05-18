@@ -39,7 +39,7 @@ public class KnowledgeHolder {
     }
 
     public void remove(String value, Archetype archetype, KnowledgeBaseType knowledgeBaseType) {
-        String toRemove = "["+knowledgeBaseType.getId()+"]{"+archetype.getId()+"}"+value;
+        String toRemove = "["+knowledgeBaseType.getId()+"]{"+archetype.getId()+"}"+value+";";
         String base = values.toString();
         base = base.replaceAll(toRemove, "");
         values = new StringBuilder(base);
@@ -48,7 +48,7 @@ public class KnowledgeHolder {
     public String toString(){
         String finalValue = values.toString();
         if(finalValue.endsWith(";")){
-            finalValue = finalValue.substring(0, finalValue.length() - 2);
+            finalValue = finalValue.substring(0, finalValue.length() - 1);
         }
         return finalValue;
     }

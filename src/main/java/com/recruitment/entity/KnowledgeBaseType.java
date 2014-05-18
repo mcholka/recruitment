@@ -4,7 +4,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by mcholka on 2014-05-16. Enjoy!
@@ -22,9 +21,6 @@ public class KnowledgeBaseType implements Serializable {
     private Date createTime;
 
     private BigDecimal points;
-
-    @OneToMany
-    List<Archetype> archetypes;
 
     @PrePersist
     public void prePersist(){
@@ -53,13 +49,5 @@ public class KnowledgeBaseType implements Serializable {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
-    }
-
-    public List<Archetype> getArchetypes() {
-        return archetypes;
-    }
-
-    public void setArchetypes(List<Archetype> archetypes) {
-        this.archetypes = archetypes;
     }
 }

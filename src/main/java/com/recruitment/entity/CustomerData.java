@@ -35,13 +35,13 @@ public class CustomerData implements Serializable {
     @ManyToOne
     private Profession profession;
 
-    @OneToOne
+    @OneToOne(mappedBy = "customerData")
     private ExtractedData extractedData;
 
-    @OneToOne
+    @OneToOne(mappedBy = "customerData")
     private FilteredData filteredData;
 
-    @OneToOne
+    @OneToOne(mappedBy = "customerData")
     private Summary summary;
 
     @Enumerated(EnumType.STRING)

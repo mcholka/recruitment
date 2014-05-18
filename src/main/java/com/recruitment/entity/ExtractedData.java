@@ -23,6 +23,7 @@ public class ExtractedData implements Serializable{
     @OneToOne
     private CustomerData customerData;
 
+    @Column(length = 10000)
     private String value;
 
     private Date createTime;

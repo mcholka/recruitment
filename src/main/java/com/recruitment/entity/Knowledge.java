@@ -9,9 +9,6 @@ import java.util.List;
  * Created by mcholka on 2014-03-26. Enjoy!
  */
 @Entity
-@Table(uniqueConstraints =  {
-        @UniqueConstraint( columnNames = {"knowledgeBaseType", "value"})
-})
 @NamedQueries({
         @NamedQuery(name = "Knowledge.getKnowledgeByBaseType", query = "SELECT i FROM Knowledge i WHERE i.knowledgeBaseType.id = :baseType"),
         @NamedQuery(name = "Knowledge.getKnowledgeByArchetype", query = "SELECT i FROM Knowledge i WHERE i.archetype  = :archetype")
