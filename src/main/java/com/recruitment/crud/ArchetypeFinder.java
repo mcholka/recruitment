@@ -26,6 +26,7 @@ public class ArchetypeFinder {
     }
 
     public Archetype findById(String id){
+        logger.info("Try to find archetype by id: " + id);
         return entityManager.find(Archetype.class, id);
     }
 }

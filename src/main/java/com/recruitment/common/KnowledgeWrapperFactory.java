@@ -137,7 +137,7 @@ public class KnowledgeWrapperFactory {
                 return affix;
             }
         }
-        return null;
+        throw new IllegalStateException("PREFIX found but no in knowledge! Value: " + value);
     }
 
     private Affix findSuffix(String value, Knowledge knowledge) {
@@ -154,6 +154,6 @@ public class KnowledgeWrapperFactory {
                 return affix;
             }
         }
-        return null;
+        throw new IllegalStateException("SUFFIX found but no in knowledge! Value: " + value);
     }
 }

@@ -18,6 +18,7 @@ public class KnowledgeBaseTypeFinder {
     private EntityManager entityManager;
 
     public KnowledgeBaseType findByID(String id){
+        logger.info("Try to find base type by id: " + id);
         return entityManager.find(KnowledgeBaseType.class, id);
     }
 }

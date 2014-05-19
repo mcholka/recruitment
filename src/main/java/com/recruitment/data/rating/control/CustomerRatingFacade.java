@@ -52,6 +52,8 @@ public class CustomerRatingFacade {
     private BigDecimal sumPoints(List<KnowledgeWrapper> knowledgeWrappers) {
         BigDecimal sum = BigDecimal.ZERO;
         for(KnowledgeWrapper knowledgeWrapper : knowledgeWrappers){
+            BigDecimal points = knowledgeWrapper.sumPoints();
+            logger.info("Add " + points + " points from value " + knowledgeWrapper.getValue().getValue());
             sum = sum.add(knowledgeWrapper.sumPoints());
         }
         logger.info("Sum of customer points: " + sum);

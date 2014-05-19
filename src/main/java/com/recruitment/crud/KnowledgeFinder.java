@@ -32,7 +32,9 @@ public class KnowledgeFinder {
     }
 
     public Knowledge findByArchetypeBaseTypeAndValue(KnowledgeBaseType knowledgeBaseType, Archetype archetype, String value){
-        logger.info("Find knowledge by " + knowledgeBaseType + " " + archetype + " " + value);
+        logger.info("Find knowledge by base type: " + knowledgeBaseType.getId() + " " +
+                "archetype: " + archetype.getId() + " " +
+                "value: " + value);
         Query query = entityManager.createNamedQuery("Knowledge.findByArchetypeBaseTypeAndValue");
         query.setParameter("archetype", archetype);
         query.setParameter("baseType", knowledgeBaseType);
