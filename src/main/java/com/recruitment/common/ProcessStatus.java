@@ -7,5 +7,5 @@ public enum ProcessStatus {
     NEW,
     EXTRACTED,
     FILTERED,
-    PROCESSED
+    RATED
 }

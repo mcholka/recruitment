@@ -6,8 +6,6 @@ import org.apache.log4j.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import java.util.List;
 
 /**
  * Created by mcholka on 2014-05-16. Enjoy!
@@ -19,9 +17,7 @@ public class KnowledgeBaseTypeFinder {
     @PersistenceContext
     private EntityManager entityManager;
 
-    @SuppressWarnings("unchecked")
-    public List<KnowledgeBaseType> findAllKnowledgeBaseTypes(){
-        Query query = entityManager.createNamedQuery("KnowledgeBaseType.findAllKnowledgeBaseTypes");
-        return query.getResultList();
+    public KnowledgeBaseType findByID(String id){
+        return entityManager.find(KnowledgeBaseType.class, id);
     }
 }

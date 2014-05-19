@@ -62,7 +62,7 @@ public class CustomerDataExtractor {
         for(Archetype archetype : archetypes){
             foundValues = dataExtractor.extractData(document, knowledgeFinder.getKnowledgeByArchetype(archetype));
             for(String value : foundValues){
-                knowledgeHolder.append(value, archetype, archetype.getKnowledgeBaseType());
+                knowledgeHolder.append(value, archetype);
             }
         }
         return knowledgeHolder;

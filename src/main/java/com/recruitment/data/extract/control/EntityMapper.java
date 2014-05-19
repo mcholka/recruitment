@@ -4,12 +4,14 @@ import com.recruitment.common.KnowledgeHolder;
 import com.recruitment.entity.CustomerData;
 import com.recruitment.entity.ExtractedData;
 import com.recruitment.entity.FilteredData;
-import org.apache.commons.lang3.StringUtils;
+import com.recruitment.entity.RatedData;
+
+import java.math.BigDecimal;
 
 /**
  * Created by mcholka on 2014-03-27. Enjoy!
  */
-public class KnowledgeCommonMapper {
+public class EntityMapper {
 
     public ExtractedData mappingToExtractedData(KnowledgeHolder knowledgeHolder, CustomerData customerData){
         ExtractedData extractedData = new ExtractedData();
@@ -24,4 +26,10 @@ public class KnowledgeCommonMapper {
         filteredData.setCustomerData(customerData);
         return filteredData;
     }
-}
+
+    public RatedData mappingToRatedData(BigDecimal points, CustomerData customerData){
+        RatedData ratedData = new RatedData();
+        ratedData.setSumPoints(points);
+        ratedData.setCustomerData(customerData);
+        return ratedData;
+    }}

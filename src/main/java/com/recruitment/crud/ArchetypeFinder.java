@@ -24,4 +24,8 @@ public class ArchetypeFinder {
         Query query = entityManager.createNamedQuery("Archetype.findAllArchetypes");
         return query.getResultList();
     }
+
+    public Archetype findById(String id){
+        return entityManager.find(Archetype.class, id);
+    }
 }

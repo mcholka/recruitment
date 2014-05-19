@@ -1,5 +1,6 @@
 package com.recruitment.data.extract.boundary;
 
+import com.recruitment.common.ProcessStatus;
 import com.recruitment.crud.CustomerDataFinder;
 import com.recruitment.data.extract.control.CustomerExtractFacade;
 import com.recruitment.entity.CustomerData;
@@ -36,7 +37,7 @@ public class FileExtractorTimer {
     }
 
     private List<CustomerData> getCustomersToExtractData() {
-        return customerDataFinder.getCustomersForDataExtract();
+        return customerDataFinder.getCustomersByStatus(ProcessStatus.NEW);
     }
 
     private void extractData(CustomerData customerData) {

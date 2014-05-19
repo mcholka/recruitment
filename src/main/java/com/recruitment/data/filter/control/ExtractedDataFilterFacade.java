@@ -3,7 +3,7 @@ package com.recruitment.data.filter.control;
 import com.recruitment.common.KnowledgeHolder;
 import com.recruitment.common.ProcessStatus;
 import com.recruitment.crud.StorageManager;
-import com.recruitment.data.extract.control.KnowledgeCommonMapper;
+import com.recruitment.data.extract.control.EntityMapper;
 import com.recruitment.entity.*;
 import org.apache.log4j.Logger;
 
@@ -18,7 +18,7 @@ public class ExtractedDataFilterFacade {
     private static final Logger logger = Logger.getLogger(ExtractedDataFilterFacade.class);
 
     @Inject
-    private KnowledgeCommonMapper knowledgeCommonMapper;
+    private EntityMapper entityMapper;
     @Inject
     private ExtractedDataFilter extractedDataFilter;
     @Inject
@@ -48,7 +48,7 @@ public class ExtractedDataFilterFacade {
     }
 
     private FilteredData mapping(KnowledgeHolder knowledgeHolder, ExtractedData extractedData) {
-        return knowledgeCommonMapper.mappingToFilteredData(knowledgeHolder, extractedData.getCustomerData());
+        return entityMapper.mappingToFilteredData(knowledgeHolder, extractedData.getCustomerData());
     }
 
     private void persist(FilteredData filteredData) {

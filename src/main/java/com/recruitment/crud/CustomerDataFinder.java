@@ -20,9 +20,9 @@ private static final Logger logger = Logger.getLogger(CustomerDataFinder.class);
     @PersistenceContext
     private EntityManager entityManager;
 
-    public List<CustomerData> getCustomersForDataExtract(){
-        Query query = entityManager.createNamedQuery("CustomerData.getCustomersForDataExtract");
-        query.setParameter("status", ProcessStatus.NEW);
+    public List<CustomerData> getCustomersByStatus(ProcessStatus processStatus){
+        Query query = entityManager.createNamedQuery("CustomerData.getCustomersByStatus");
+        query.setParameter("status", processStatus);
 
         @SuppressWarnings("unchecked")
         List<CustomerData> customers = query.getResultList();

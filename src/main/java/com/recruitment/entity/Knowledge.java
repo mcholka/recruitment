@@ -10,8 +10,12 @@ import java.util.List;
  */
 @Entity
 @NamedQueries({
-        @NamedQuery(name = "Knowledge.getKnowledgeByBaseType", query = "SELECT i FROM Knowledge i WHERE i.knowledgeBaseType.id = :baseType"),
-        @NamedQuery(name = "Knowledge.getKnowledgeByArchetype", query = "SELECT i FROM Knowledge i WHERE i.archetype  = :archetype")
+        @NamedQuery(name = "Knowledge.getKnowledgeByBaseType", query = "SELECT i FROM Knowledge i " +
+                "WHERE i.knowledgeBaseType.id = :baseType"),
+        @NamedQuery(name = "Knowledge.getKnowledgeByArchetype", query = "SELECT i FROM Knowledge i " +
+                "WHERE i.archetype  = :archetype"),
+        @NamedQuery(name = "Knowledge.findByArchetypeBaseTypeAndValue", query = "SELECT i FROM Knowledge i " +
+                "WHERE i.archetype = :archetype AND i.knowledgeBaseType = :baseType AND i.value = :value")
 })
 public class Knowledge implements Serializable {
     @Id

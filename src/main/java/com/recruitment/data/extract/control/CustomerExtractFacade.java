@@ -16,7 +16,7 @@ public class CustomerExtractFacade {
     @Inject
     CustomerDataExtractor customerDataExtractor;
     @Inject
-    KnowledgeCommonMapper knowledgeCommonMapper;
+    EntityMapper entityMapper;
     @Inject
     StorageManager storageManager;
 
@@ -32,7 +32,7 @@ public class CustomerExtractFacade {
     }
 
     private ExtractedData mappingToExtractedData(KnowledgeHolder extractedKnowledge, CustomerData customerData) {
-        return knowledgeCommonMapper.mappingToExtractedData(extractedKnowledge, customerData);
+        return entityMapper.mappingToExtractedData(extractedKnowledge, customerData);
     }
 
     private void store(ExtractedData extractedData) {

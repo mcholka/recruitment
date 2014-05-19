@@ -11,7 +11,7 @@ import java.util.Date;
  */
 @Entity
 @NamedQueries({
-        @NamedQuery(name = "CustomerData.getCustomersForDataExtract", query = "" +
+        @NamedQuery(name = "CustomerData.getCustomersByStatus", query = "" +
                 "SELECT i FROM CustomerData i " +
                 "WHERE i.processStatus = :status"
         )
@@ -42,7 +42,7 @@ public class CustomerData implements Serializable {
     private FilteredData filteredData;
 
     @OneToOne(mappedBy = "customerData")
-    private Summary summary;
+    private RatedData ratedData;
 
     @Enumerated(EnumType.STRING)
     private ProcessStatus processStatus;
@@ -147,12 +147,12 @@ public class CustomerData implements Serializable {
         this.extractedData = extractedData;
     }
 
-    public Summary getSummary() {
-        return summary;
+    public RatedData getRatedData() {
+        return ratedData;
     }
 
-    public void setSummary(Summary summary) {
-        this.summary = summary;
+    public void setRatedData(RatedData ratedData) {
+        this.ratedData = ratedData;
     }
 
     public FilteredData getFilteredData() {

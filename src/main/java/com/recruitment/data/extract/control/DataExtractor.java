@@ -17,6 +17,8 @@ public class DataExtractor {
     private static final Logger logger = Logger.getLogger(DataExtractor.class);
 
     private String foundValue;
+    private String prefix;
+    private String suffix;
 
     public List<String> extractData(String document, List<Knowledge> interestedValues){
         List<String> foundValues = new ArrayList<>();
@@ -24,7 +26,7 @@ public class DataExtractor {
             boolean found = tryToFindValue(document, interestingValue);
             checkState(found);
             if(found){
-                foundValues.add(foundValue);
+                foundValues.add(addValue());
             }
         }
         logger.info("Found in doc " + foundValues.size() + " interesting values");
@@ -41,13 +43,18 @@ public class DataExtractor {
     }
 
     private boolean tryToFindValue(String document, Knowledge knowledge) {
-        foundValue = null;
-
+        setToNullGlobalValues();
         if(knowledge.getAffixes().isEmpty()){
             return findWithoutAffixes(document, knowledge);
         } else {
             return findWithAffixes(document, knowledge);
         }
+    }
+
+    private void setToNullGlobalValues() {
+        foundValue = null;
+        prefix = null;
+        suffix = null;
     }
 
     private boolean findWithoutAffixes(String document, Knowledge knowledge) {
@@ -89,8 +96,6 @@ public class DataExtractor {
 
     private boolean findWithAffixes(String document, Knowledge knowledge) {
         logger.info("Try to find value: " + knowledge.getValue() + " with affixes");
-        boolean prefixFound = false;
-        boolean suffixFound = false;
         boolean valueFound;
 
         if(!findWithoutAffixes(document, knowledge)){
@@ -101,7 +106,7 @@ public class DataExtractor {
         String toFound = knowledge.getValue();
         for(Affix affix : knowledge.getAffixes()) {
             boolean required = affix.isRequired();
-            if(alreadyMatched(affix, prefixFound, suffixFound)){
+            if(alreadyMatched(affix)){
                 logger.info("Affix with type " + affix.getType() + " already matched! Skip affix " + affix.getValue());
                 continue;
             }
@@ -110,19 +115,21 @@ public class DataExtractor {
             logger.info("Try to find value: " + toFound);
 
             valueFound = findValue(document, toFound);
+
             if(required && !valueFound){
                 logger.info("Affix " + affix.getValue() + " required but not found! Not adding");
-                foundValue = null;
                 return false;
             }
             if(valueFound && AffixType.PREFIX.equals(affix.getType())){
                 logger.info("Found prefix");
-                prefixFound = true;
+                prefix = affix.getValue();
+                toFound = remove(toFound, affix);
                 continue;
             }
             if(valueFound && AffixType.SUFFIX.equals(affix.getType())){
                 logger.info("Found suffix");
-                suffixFound = true;
+                suffix = affix.getValue();
+                toFound = remove(toFound, affix);
                 continue;
             }
             if(!required && !valueFound){
@@ -134,9 +141,9 @@ public class DataExtractor {
         return true;
     }
 
-    private boolean alreadyMatched(Affix affix, boolean prefixFound, boolean suffixFound) {
-        return (AffixType.PREFIX.equals(affix.getType()) && prefixFound) ||
-                (AffixType.SUFFIX.equals(affix.getType()) && suffixFound);
+    private boolean alreadyMatched(Affix affix) {
+        return (AffixType.PREFIX.equals(affix.getType()) && prefix != null) ||
+                (AffixType.SUFFIX.equals(affix.getType()) && suffix != null);
     }
 
     private String append(String value, Affix affix) {
@@ -157,5 +164,16 @@ public class DataExtractor {
         } else {
             throw new RuntimeException("Unrecognized affix " + affix.getValue() + " with type " + affix.getType());
         }
+    }
+
+    private String addValue() {
+        String value = foundValue;
+        if(prefix != null){
+            value = "<PREFIX " + prefix + ">" + value;
+        }
+        if(suffix != null){
+            value = value + "<SUFFIX " + suffix + ">";
+        }
+        return value;
     }
 }
