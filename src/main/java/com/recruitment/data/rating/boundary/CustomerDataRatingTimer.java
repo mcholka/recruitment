@@ -18,8 +18,8 @@ import java.util.List;
  */
 @Singleton
 @Startup
-public class FilteredDataVerifier {
-    private static final Logger logger = Logger.getLogger(FilteredDataVerifier.class);
+public class CustomerDataRatingTimer {
+    private static final Logger logger = Logger.getLogger(CustomerDataRatingTimer.class);
 
     @Inject
     CustomerDataFinder customerDataFinder;
@@ -30,10 +30,10 @@ public class FilteredDataVerifier {
     public synchronized void verify(){
         logger.info("FilteredDataVerifier start");
         List<CustomerData> customerDataList = findCustomersForRating();
-        logger.info("FilteredDataVerifier end");
         for(CustomerData customerData : customerDataList){
             processRating(customerData.getFilteredData());
         }
+        logger.info("FilteredDataVerifier end");
     }
 
     private List<CustomerData> findCustomersForRating() {

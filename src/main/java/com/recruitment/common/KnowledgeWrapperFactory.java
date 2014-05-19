@@ -32,7 +32,8 @@ public class KnowledgeWrapperFactory {
     private static final Pattern SUFFIX_PATTERN = Pattern.compile("<SUFFIX (.+)>");
     private static final Integer MATCHER = 1;
 
-    public KnowledgeWrapper mappingToWrapper(String value){
+    public KnowledgeWrapper mappingToWrapper(String value) {
+        logger.info("Mapping value: " + value + " to KnowledgeWrapper");
         KnowledgeWrapper knowledgeWrapper = new KnowledgeWrapper();
 
         Archetype archetype = findArchetypeByID(matchArchetypeID(value));

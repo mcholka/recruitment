@@ -17,8 +17,8 @@ import java.util.List;
  */
 @Singleton
 @Startup
-public class FileExtractorTimer {
-    private static final Logger logger = Logger.getLogger(FileExtractorTimer.class);
+public class CustomerDataExtractTimer {
+    private static final Logger logger = Logger.getLogger(CustomerDataExtractTimer.class);
 
     @Inject
     private CustomerDataFinder customerDataFinder;

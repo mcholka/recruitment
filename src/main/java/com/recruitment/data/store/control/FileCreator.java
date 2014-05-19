@@ -1,7 +1,7 @@
 package com.recruitment.data.store.control;
 
 import com.recruitment.common.RecruitmentUtils;
-import com.recruitment.data.store.boundary.FileStoreException;
+import com.recruitment.common.FileStoreException;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 

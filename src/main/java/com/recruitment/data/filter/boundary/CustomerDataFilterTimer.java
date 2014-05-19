@@ -18,8 +18,8 @@ import java.util.List;
  */
 @Singleton
 @Startup
-public class DataFilterTimer {
-    private static final Logger logger = Logger.getLogger(DataFilterTimer.class);
+public class CustomerDataFilterTimer {
+    private static final Logger logger = Logger.getLogger(CustomerDataFilterTimer.class);
 
     @Inject
     CustomerDataFinder customerDataFinder;

@@ -1,5 +1,6 @@
 package com.recruitment.data.store.boundary;
 
+import com.recruitment.common.FileStoreException;
 import com.recruitment.common.RecruitmentUtils;
 import com.recruitment.crud.ProfessionFinder;
 import com.recruitment.crud.StorageManager;

@@ -13,10 +13,6 @@ public class KnowledgeHolder {
         values = new StringBuilder();
     }
 
-    public KnowledgeHolder(String values){
-        this.values = new StringBuilder(values);
-    }
-
     private StringBuilder values;
 
     public void appendFullProcessed(String value){
@@ -36,13 +32,6 @@ public class KnowledgeHolder {
                 append("}").
                 append(value).
                 append(";");
-    }
-
-    public void remove(String value, Archetype archetype, KnowledgeBaseType knowledgeBaseType) {
-        String toRemove = "["+knowledgeBaseType.getId()+"]{"+archetype.getId()+"}"+value+";";
-        String base = values.toString();
-        base = base.replaceAll(toRemove, "");
-        values = new StringBuilder(base);
     }
 
     public String toString(){

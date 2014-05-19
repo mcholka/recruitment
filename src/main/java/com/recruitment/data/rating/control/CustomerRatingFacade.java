@@ -8,6 +8,7 @@ import com.recruitment.data.extract.control.EntityMapper;
 import com.recruitment.entity.CustomerData;
 import com.recruitment.entity.FilteredData;
 import com.recruitment.entity.RatedData;
+import org.apache.log4j.Logger;
 
 import javax.inject.Inject;
 import java.math.BigDecimal;
@@ -18,6 +19,7 @@ import java.util.List;
  * Created by mcholka on 2014-05-18. Enjoy!
  */
 public class CustomerRatingFacade {
+    private static final Logger logger = Logger.getLogger(CustomerRatingFacade.class);
 
     @Inject
     KnowledgeWrapperFactory knowledgeWrapperFactory;
@@ -52,6 +54,7 @@ public class CustomerRatingFacade {
         for(KnowledgeWrapper knowledgeWrapper : knowledgeWrappers){
             sum = sum.add(knowledgeWrapper.sumPoints());
         }
+        logger.info("Sum of customer points: " + sum);
         return sum;
     }
 
