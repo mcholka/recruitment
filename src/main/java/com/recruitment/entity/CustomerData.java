@@ -14,7 +14,8 @@ import java.util.Date;
         @NamedQuery(name = "CustomerData.getCustomersByStatus", query = "" +
                 "SELECT i FROM CustomerData i " +
                 "WHERE i.processStatus = :status"
-        )
+        ),
+        @NamedQuery( name = "CustomerData.getAllCustomers", query = "SELECT i FROM CustomerData i")
 })
 public class CustomerData implements Serializable {
 

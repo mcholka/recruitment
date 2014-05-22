@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/resources/template/main.xhtml">
+
+    <ui:define name="head">
+        <h:outputStylesheet library="css" name="login.css" />
+    </ui:define>
+
+    <ui:define name="body">
+        <div id="filUploadForm">
+            <h:outputText value="Recruitment Admin Panel"
+                          style="text-align: center; font-size: 16px;" />
+            <h:form id="loginForm">
+                <p:growl id="message" autoUpdate="true" />
+                <h:panelGrid columns="2" styleClass="floatLeftWidth100" >
+                    <h:outputText value="Login: "/>
+                    <p:inputText id="login" value="#{loginModule.login}" required="true" />
+                    <h:outputText value="Password: "/>
+                    <p:password id="password" value="#{loginModule.password}" required="true" />
+                </h:panelGrid>
+                <h:commandButton update="@form" value="Login" action="#{loginModule.loginAdmin}" />
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>

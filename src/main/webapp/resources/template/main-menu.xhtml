@@ -1,0 +1,15 @@
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+              xmlns:ui="http://java.sun.com/jsf/facelets"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:p="http://primefaces.org/ui">
+    <h:form>
+        <p:menubar>
+            <p:menuitem value="Customers"
+                        url="/admin/customer/customer-list.recruitment"
+                        icon="ui-icon-key"/>
+            <p:menuitem value="LoggedOut"
+                        icon="ui-icon-power"
+                        action="#{loginChecker.loggedOut}"/>
+        </p:menubar>
+    </h:form>
+</ui:component>

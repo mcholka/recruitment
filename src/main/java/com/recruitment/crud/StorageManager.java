@@ -6,12 +6,13 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import java.io.Serializable;
 
 /**
  * Created by mcholka on 2014-03-25. Enjoy!
  */
 @Stateless
-public class StorageManager {
+public class StorageManager implements Serializable {
     private static final Logger logger = Logger.getLogger(StorageManager.class);
 
     @PersistenceContext

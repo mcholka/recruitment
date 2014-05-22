@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="/resources/template/admin-template.xhtml">
+
+    <ui:define name="documentHead">
+        <h:outputStylesheet library="css" name="common.css" />
+    </ui:define>
+
+    <ui:define name="subpageHeader">
+        <h:outputText value="Customer List" styleClass="headerTxt"/>
+    </ui:define>
+
+    <ui:define name="subpageContentBody">
+        <h:form rendered="#{loginChecker.loggedIn}">
+            <p:growl id="message" autoUpdate="true" />
+            <p:dataTable id="customerDataTable"
+                         styleClass="floatLeftWidth100"
+                         var="customer"
+                         value="#{customerController.allCustomers}"
+                         rowIndexVar="row"
+                         emptyMessage="No cusstomers found...">
+
+                <!--@elvariable id="customer" type="com.recruitment.entity.CustomerData"-->
+                <!--@elvariable id="row" type="Integer"-->
+
+                <p:column headerText="#">
+                    <h:outputText value="#{row + 1}"/>
+                </p:column>
+                <p:column headerText="ID" sortBy="#{customer.id}">
+                    <h:outputText value="#{customer.id}"/>
+                </p:column>
+                <p:column headerText="First Name" sortBy="#{customer.firstName}">
+                    <h:outputText value="#{customer.firstName}"/>
+                </p:column>
+                <p:column headerText="Last Name" sortBy="#{customer.lastName}">
+                    <h:outputText value="#{customer.lastName}"/>
+                </p:column>
+                <p:column headerText="Email" sortBy="#{customer.email}">
+                    <h:outputText value="#{customer.email}"/>
+                </p:column>
+                <p:column headerText="Profession" sortBy="#{customer.profession.id}">
+                    <h:outputText value="#{customer.profession.id}"/>
+                </p:column>
+                <p:column headerText="Date" sortBy="#{customer.createTime}">
+                    <h:outputText value="#{customer.createTime}"/>
+                </p:column>
+                <p:column headerText="Status" sortBy="#{customer.processStatus}">
+                    <h:outputText value="#{customer.processStatus}"/>
+                </p:column>
+                <p:column headerText="Details">
+                </p:column>
+                <p:column headerText="CV">
+                    <p:commandButton icon="ui-icon-search"
+                                     process="@this"
+                                     update="@form"
+                                     action="#{customerController.loadPDF}"
+                                     oncomplete="cvWindow.show()">
+                        <f:setPropertyActionListener value="#{customer}" target="#{customerController.customerData}" />
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+
+            <p:dialog id="cvWindow"
+                      header="CV"
+                      widgetVar="cvWindow"
+                      resizable="false"
+                      showEffect="puff"
+                      hideEffect="puff"
+                      width="950px"
+                      height="500px">
+                <p:media value="#{customerController.streamedContent}" width="600px" height="300px" player="pdf"  />
+                <br/>
+                <p:commandButton value="Close" onclick="cvWindow.hide();" process="@this"/>
+            </p:dialog>
+        </h:form>
+    </ui:define>
+</ui:composition>

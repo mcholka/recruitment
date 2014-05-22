@@ -1,0 +1,11 @@
+.status {
+    margin: auto;
+    padding: 20px;
+    position: relative;
+    text-align: center;
+    top: 200px;
+    width: 450px;
+    border-radius: 5% 5% 5% 5%;
+    box-shadow: 0 0 20px #000000;
+    background: #e1ffdb;
+}
