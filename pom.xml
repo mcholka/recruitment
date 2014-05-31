@@ -23,7 +23,7 @@
         </dependency>
         <dependency>
             <groupId>org.primefaces.themes</groupId>
-            <artifactId>vader</artifactId>
+            <artifactId>sunny</artifactId>
             <version>1.0.10</version>
         </dependency>
         <!--apache-->

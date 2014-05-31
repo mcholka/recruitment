@@ -1,6 +1,7 @@
 package com.recruitment.entity;
 
 import com.recruitment.common.ProcessStatus;
+import com.recruitment.common.VerifyStatus;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -55,11 +56,15 @@ public class CustomerData implements Serializable {
 
     private String fileName;
 
+    @Enumerated(EnumType.STRING)
+    private VerifyStatus verifyStatus;
+
     @PrePersist
     public void init(){
         createTime = new Date();
         lastModifiedTime = new Date();
         processStatus = ProcessStatus.NEW;
+        verifyStatus = VerifyStatus.NOT_VERIFIED;
     }
 
     @PreUpdate
@@ -162,5 +167,13 @@ public class CustomerData implements Serializable {
 
     public void setFilteredData(FilteredData filteredData) {
         this.filteredData = filteredData;
+    }
+
+    public VerifyStatus getVerifyStatus() {
+        return verifyStatus;
+    }
+
+    public void setVerifyStatus(VerifyStatus verifyStatus) {
+        this.verifyStatus = verifyStatus;
     }
 }

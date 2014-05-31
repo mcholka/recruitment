@@ -9,6 +9,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by mcholka on 2014-03-25. Enjoy!
@@ -37,7 +39,10 @@ public class FileValidator implements Validator {
     }
 
     private void checkFileType(UploadedFile file) {
-        if(!RecruitmentUtils.REQUIRED_FILE_FORMAT.equals(file.getContentType())){
+        Pattern pattern = Pattern.compile("\\S+\\.pdf$");
+        Matcher matcher = pattern.matcher(file.getFileName());
+
+        if(!RecruitmentUtils.REQUIRED_FILE_FORMAT.equals(file.getContentType()) || !matcher.matches()){
             throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Błędny format pliku, prześlij proszę plik w formacie PDF", null));
         }
     }

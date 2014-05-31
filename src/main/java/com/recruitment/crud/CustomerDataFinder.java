@@ -27,13 +27,15 @@ public class CustomerDataFinder implements Serializable {
 
         @SuppressWarnings("unchecked")
         List<CustomerData> customers = query.getResultList();
-        logger.info("Found " + customers.size() + " customers for data extract");
+        logger.info("Found " + customers.size() + " customers");
         return customers;
     }
 
     @SuppressWarnings("unchecked")
-    public List<CustomerData> getAllCustomers(){
-        Query query = entityManager.createNamedQuery("CustomerData.getAllCustomers");
-        return query.getResultList();
+    public List<CustomerData> findByQuery(String query, int first, int pageSize) {
+        Query entityQuery = entityManager.createQuery(query);
+        entityQuery.setFirstResult(first);
+        entityQuery.setMaxResults(pageSize);
+        return entityQuery.getResultList();
     }
 }

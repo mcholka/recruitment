@@ -11,17 +11,23 @@
 
     <ui:define name="body">
         <div id="filUploadForm">
-            <h:outputText value="Recruitment Admin Panel"
+            <h:outputText value="Panel Administratora"
                           style="text-align: center; font-size: 16px;" />
             <h:form id="loginForm">
                 <p:growl id="message" autoUpdate="true" />
                 <h:panelGrid columns="2" styleClass="floatLeftWidth100" >
                     <h:outputText value="Login: "/>
-                    <p:inputText id="login" value="#{loginModule.login}" required="true" />
-                    <h:outputText value="Password: "/>
-                    <p:password id="password" value="#{loginModule.password}" required="true" />
+                    <p:inputText id="login"
+                                 value="#{loginModule.login}"
+                                 required="true"
+                                 requiredMessage="Login nie może być pusty" />
+                    <h:outputText value="Hasło: "/>
+                    <p:password id="password"
+                                value="#{loginModule.password}"
+                                required="true"
+                                requiredMessage="Hasło nie może być puste"/>
                 </h:panelGrid>
-                <h:commandButton update="@form" value="Login" action="#{loginModule.loginAdmin}" />
+                <h:commandButton update="@form" value="Zaloguj" action="#{loginModule.loginAdmin}" />
             </h:form>
         </div>
     </ui:define>

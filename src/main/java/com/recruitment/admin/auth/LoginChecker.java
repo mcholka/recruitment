@@ -37,8 +37,6 @@ public class LoginChecker implements Serializable {
     }
 
     public boolean isLoggedIn(){
-        logger.info("Is user logged?");
-
         if(admin == null){
             logger.info("Null admin!");
             RecruitmentUtils.redirect("/admin/login.recruitment");
@@ -50,6 +48,7 @@ public class LoginChecker implements Serializable {
         }
         Date now = new Date();
         if(now.after(limitTime)){
+            logger.info("Limit time exceeded!");
             loggedOut();
             return false;
         }

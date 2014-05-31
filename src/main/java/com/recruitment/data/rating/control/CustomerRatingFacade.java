@@ -3,6 +3,7 @@ package com.recruitment.data.rating.control;
 import com.recruitment.common.KnowledgeWrapper;
 import com.recruitment.common.KnowledgeWrapperFactory;
 import com.recruitment.common.ProcessStatus;
+import com.recruitment.common.RecruitmentUtils;
 import com.recruitment.crud.StorageManager;
 import com.recruitment.data.extract.control.EntityMapper;
 import com.recruitment.entity.CustomerData;
@@ -13,6 +14,7 @@ import org.apache.log4j.Logger;
 import javax.inject.Inject;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -37,6 +39,9 @@ public class CustomerRatingFacade {
     }
 
     private List<KnowledgeWrapper> mappingStringToWrappers(String value) {
+        if(RecruitmentUtils.emptyString(value)){
+            return Collections.emptyList();
+        }
         String[] values = value.split(";");
         List<KnowledgeWrapper> knowledgeWrappers = new ArrayList<>();
         for(String valueToWrap : values){
@@ -54,7 +59,7 @@ public class CustomerRatingFacade {
         for(KnowledgeWrapper knowledgeWrapper : knowledgeWrappers){
             BigDecimal points = knowledgeWrapper.sumPoints();
             logger.info("Add " + points + " points from value " + knowledgeWrapper.getValue().getValue());
-            sum = sum.add(knowledgeWrapper.sumPoints());
+            sum = sum.add(points);
         }
         logger.info("Sum of customer points: " + sum);
         return sum;

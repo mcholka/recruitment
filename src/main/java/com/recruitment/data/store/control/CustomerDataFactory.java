@@ -35,16 +35,10 @@ public class CustomerDataFactory {
     }
 
     private byte[] getBytes(UploadedFile file) {
-        InputStream inputStream = null;
-        try {
-            inputStream = file.getInputstream();
+        try (InputStream inputStream = file.getInputstream()){
             return IOUtils.toByteArray(inputStream);
         } catch (IOException e) {
             throw new IllegalArgumentException(e.getMessage(), e);
-        } finally {
-            if(inputStream != null){
-                IOUtils.closeQuietly(inputStream);
-            }
         }
     }
 }

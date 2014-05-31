@@ -20,62 +20,61 @@
             <p:dataTable id="customerDataTable"
                          styleClass="floatLeftWidth100"
                          var="customer"
-                         value="#{customerController.allCustomers}"
+                         value="#{customerController.customerDataModel}"
+                         paginator="true"
+                         lazy="true"
                          rowIndexVar="row"
-                         emptyMessage="No cusstomers found...">
-
+                         emptyMessage="#{viewConfig.defaultEmptyMessage}"
+                         paginatorPosition="#{viewConfig.defaultPaginatorPosition}"
+                         rows="#{viewConfig.rowPerPageDefault}"
+                         paginatorTemplate="#{viewConfig.paginatorTemplate}"
+                         rowsPerPageTemplate="#{viewConfig.rowsPerPageTemplate}">
                 <!--@elvariable id="customer" type="com.recruitment.entity.CustomerData"-->
                 <!--@elvariable id="row" type="Integer"-->
-
                 <p:column headerText="#">
                     <h:outputText value="#{row + 1}"/>
                 </p:column>
-                <p:column headerText="ID" sortBy="#{customer.id}">
-                    <h:outputText value="#{customer.id}"/>
-                </p:column>
-                <p:column headerText="First Name" sortBy="#{customer.firstName}">
+                <p:column headerText="Imię" sortBy="#{customer.firstName}">
                     <h:outputText value="#{customer.firstName}"/>
                 </p:column>
-                <p:column headerText="Last Name" sortBy="#{customer.lastName}">
+                <p:column headerText="Nazwisko" sortBy="#{customer.lastName}">
                     <h:outputText value="#{customer.lastName}"/>
                 </p:column>
                 <p:column headerText="Email" sortBy="#{customer.email}">
                     <h:outputText value="#{customer.email}"/>
                 </p:column>
-                <p:column headerText="Profession" sortBy="#{customer.profession.id}">
+                <p:column headerText="Profesja" sortBy="#{customer.profession.id}">
                     <h:outputText value="#{customer.profession.id}"/>
                 </p:column>
-                <p:column headerText="Date" sortBy="#{customer.createTime}">
+                <p:column headerText="Data" sortBy="#{customer.createTime}">
                     <h:outputText value="#{customer.createTime}"/>
                 </p:column>
-                <p:column headerText="Status" sortBy="#{customer.processStatus}">
-                    <h:outputText value="#{customer.processStatus}"/>
+                <p:column headerText="Status" sortBy="#{customer.processStatus.description}">
+                    <h:outputText value="#{customer.processStatus.description}"/>
                 </p:column>
-                <p:column headerText="Details">
+                <p:column headerText="Punkty" sortBy="#{customer.ratedData.sumPoints}">
+                    <h:outputText value="#{customer.ratedData.sumPoints}"/>
+                </p:column>
+
+                <p:column headerText="Ocena" sortBy="#{customer.verifyStatus}">
+                    <p:inplace editor="true">
+                        <p:selectOneMenu value="#{customer.verifyStatus}"
+                                         effect="puff"
+                                         onchange="#{customerController.update(customer)} ">
+                            <f:selectItems value="#{customerController.verifyStatusList}" />
+                        </p:selectOneMenu>
+                    </p:inplace>
                 </p:column>
                 <p:column headerText="CV">
-                    <p:commandButton icon="ui-icon-search"
+                    <p:commandButton value="Pobierz"
+                                     ajax="false"
                                      process="@this"
-                                     update="@form"
-                                     action="#{customerController.loadPDF}"
-                                     oncomplete="cvWindow.show()">
-                        <f:setPropertyActionListener value="#{customer}" target="#{customerController.customerData}" />
+                                     action="#{customerController.loadPDF(customer)}"
+                                     icon="ui-icon-arrowthick-1-s">
+                        <p:fileDownload value="#{customerController.streamedContent}" />
                     </p:commandButton>
                 </p:column>
             </p:dataTable>
-
-            <p:dialog id="cvWindow"
-                      header="CV"
-                      widgetVar="cvWindow"
-                      resizable="false"
-                      showEffect="puff"
-                      hideEffect="puff"
-                      width="950px"
-                      height="500px">
-                <p:media value="#{customerController.streamedContent}" width="600px" height="300px" player="pdf"  />
-                <br/>
-                <p:commandButton value="Close" onclick="cvWindow.hide();" process="@this"/>
-            </p:dialog>
         </h:form>
     </ui:define>
 </ui:composition>
