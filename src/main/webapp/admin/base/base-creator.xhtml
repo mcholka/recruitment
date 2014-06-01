@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="/resources/template/admin-template.xhtml">
+
+    <ui:define name="documentHead">
+        <h:outputStylesheet library="css" name="common.css" />
+    </ui:define>
+
+    <ui:define name="subpageHeader">
+        <h:outputText value="Nowy Typ Bazowy" styleClass="headerTxt"/>
+    </ui:define>
+
+    <ui:define name="subpageContentBody">
+        <h:form rendered="#{loginChecker.loggedIn}"
+                styleClass="floatLeftWidth100">
+            <p:growl id="message" autoUpdate="true" />
+            <h:panelGrid columns="2" >
+                <h:outputText value="Nazwa Typu Bazowego" />
+                <p:inputText value="#{baseTypeController.knowledgeBaseType.id}"
+                             required="true"
+                             requiredMessage="Nazwa typu bazowego nie może być pusta"/>
+
+                <h:outputText value="Punkty Za Typ Bazowy" />
+                <p:inputText id="points"
+                             value="#{baseTypeController.knowledgeBaseType.points}"
+                             required="true"
+                             requiredMessage="Muszą zostać przydzielone punkty"/>
+                <h:panelGroup></h:panelGroup>
+                <p:slider for="points" />
+
+                <p:commandButton value="Zapisz"
+                                 action="#{baseTypeController.storeNew}"
+                                 icon="ui-icon-circle-check"
+                                 update="@form" />
+                <p:button value="Powrót"
+                          href="/admin/base/base-list.recruitment"
+                          icon="ui-icon-circle-close"/>
+            </h:panelGrid>
+        </h:form>
+    </ui:define>
+</ui:composition>

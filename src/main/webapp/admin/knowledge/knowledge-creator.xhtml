@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="/resources/template/admin-template.xhtml">
+
+    <ui:define name="documentHead">
+        <h:outputStylesheet library="css" name="common.css" />
+    </ui:define>
+
+    <ui:define name="subpageHeader">
+        <h:outputText value="Nowe Wyrażenie" styleClass="headerTxt"/>
+    </ui:define>
+
+    <ui:define name="subpageContentBody">
+        <h:form rendered="#{loginChecker.loggedIn}"
+                styleClass="floatLeftWidth100">
+            <p:growl id="message" autoUpdate="true" />
+            <h:panelGrid columns="2" >
+                <h:outputText value="Wartość" />
+                <p:inputText value="#{knowledgeController.knowledge.value}"
+                             required="true"
+                             requiredMessage="Wartość nie może być pusta"/>
+
+                <h:outputText value="Punkty" />
+                <p:inputText id="points"
+                             value="#{knowledgeController.knowledge.points}"
+                             required="true"
+                             requiredMessage="Muszą zostać przydzielone punkty"/>
+                <h:panelGroup></h:panelGroup>
+                <p:slider for="points" />
+
+                <h:outputText value="Typ Bazowy" />
+                <p:selectOneMenu value="#{knowledgeController.knowledge.knowledgeBaseType}"
+                                 effect="puff"
+                                 converter="BaseTypeConverter">
+                    <f:selectItems value="#{baseTypeController.baseTypes}" />
+                </p:selectOneMenu>
+
+                <h:outputText value="Archetyp" />
+                <p:selectOneMenu value="#{knowledgeController.knowledge.archetype}"
+                                 effect="puff"
+                                 converter="ArchetypeConverter">
+                    <f:selectItems value="#{archetypeController.archetypes}" />
+                </p:selectOneMenu>
+
+                <p:commandButton value="Zapisz"
+                                 action="#{knowledgeController.storeNew}"
+                                 icon="ui-icon-circle-check"
+                                 update="@form" />
+                <p:button value="Powrót"
+                          href="/admin/knowledge/knowledge-list.recruitment"
+                          icon="ui-icon-circle-close"/>
+            </h:panelGrid>
+        </h:form>
+    </ui:define>
+</ui:composition>

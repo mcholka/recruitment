@@ -31,4 +31,10 @@ public class KnowledgeBaseTypeFinder {
         entityQuery.setMaxResults(pageSize);
         return entityQuery.getResultList();
     }
+
+    @SuppressWarnings("unchecked")
+    public List<KnowledgeBaseType> getAll(){
+        Query query = entityManager.createNamedQuery("KnowledgeBaseType.getAll");
+        return query.getResultList();
+    }
 }

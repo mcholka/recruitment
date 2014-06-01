@@ -36,6 +36,11 @@
 
                 <!--@elvariable id="archetype" type="com.recruitment.entity.Archetype"-->
                 <!--@elvariable id="row" type="Integer"-->
+                <f:facet name="header">
+                    <p:button href="/admin/archetype/archetype-creator.recruitment"
+                              value="Dodaj Archetyp"
+                              icon="ui-icon-circle-plus" style="float: left;"/>
+                </f:facet>
                 <p:column headerText="#">
                     <h:outputText value="#{row + 1}"/>
                 </p:column>

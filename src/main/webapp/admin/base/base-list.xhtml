@@ -36,6 +36,11 @@
 
                 <!--@elvariable id="baseType" type="com.recruitment.entity.KnowledgeBaseType"-->
                 <!--@elvariable id="row" type="Integer"-->
+                <f:facet name="header">
+                    <p:button href="/admin/base/base-creator.recruitment"
+                              value="Dodaj Typ Bazowy"
+                              icon="ui-icon-circle-plus" style="float: left;"/>
+                </f:facet>
                 <p:column headerText="#">
                     <h:outputText value="#{row + 1}"/>
                 </p:column>

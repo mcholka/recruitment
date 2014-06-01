@@ -36,6 +36,11 @@
 
                 <!--@elvariable id="profession" type="com.recruitment.entity.Profession"-->
                 <!--@elvariable id="row" type="Integer"-->
+                <f:facet name="header">
+                    <p:button href="/admin/profession/profession-creator.recruitment"
+                              value="Dodaj Profesję"
+                              icon="ui-icon-circle-plus" style="float: left;"/>
+                </f:facet>
                 <p:column headerText="#">
                     <h:outputText value="#{row + 1}"/>
                 </p:column>

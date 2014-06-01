@@ -36,6 +36,11 @@
 
                 <!--@elvariable id="knowledge" type="com.recruitment.entity.Knowledge"-->
                 <!--@elvariable id="row" type="Integer"-->
+                <f:facet name="header">
+                    <p:button href="/admin/knowledge/knowledge-creator.recruitment"
+                              value="Dodaj Wartość"
+                              icon="ui-icon-circle-plus" style="float: left;"/>
+                </f:facet>
                 <p:column headerText="#">
                     <h:outputText value="#{row + 1}"/>
                 </p:column>
