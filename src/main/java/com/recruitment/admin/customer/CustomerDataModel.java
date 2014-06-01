@@ -26,20 +26,23 @@ public class CustomerDataModel extends LazyDataModel<CustomerData> implements Se
 
     @Override
     public List<CustomerData> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String,String> filters) {
-        String query;
-        if(RecruitmentUtils.emptyString(sortField)) {
-            query = "SELECT i FROM CustomerData i ORDER BY i.createTime DESC";
-        } else if(SortOrder.ASCENDING.equals(sortOrder)){
-            query = "SELECT i FROM CustomerData i ORDER BY " + sortField + " " + sortOrder.name().substring(0, 3);
-        } else {
-            query = "SELECT i FROM CustomerData i ORDER BY " + sortField + " " + sortOrder.name().substring(0, 4);
-        }
+        String query = buildQuery(sortField, sortOrder);
         logger.info("Search by query: " + query + " First: " + first + " PageSize: " + pageSize);
 
         customerDataList = customerDataFinder.findByQuery(query, first, pageSize);
 
         setRowCount(customerDataList.size());
         return customerDataList;
+    }
+
+    private String buildQuery(String sortField, SortOrder sortOrder) {
+        if(RecruitmentUtils.emptyString(sortField)) {
+            return "SELECT i FROM CustomerData i ORDER BY i.createTime DESC";
+        }
+        if(SortOrder.ASCENDING.equals(sortOrder)){
+            return "SELECT i FROM CustomerData i ORDER BY " + sortField + " " + sortOrder.name().substring(0, 3);
+        }
+        return "SELECT i FROM CustomerData i ORDER BY " + sortField + " " + sortOrder.name().substring(0, 4);
     }
 
     @Override

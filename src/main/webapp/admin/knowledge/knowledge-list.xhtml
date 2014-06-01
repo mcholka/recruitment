@@ -17,6 +17,39 @@
     <ui:define name="subpageContentBody">
         <h:form rendered="#{loginChecker.loggedIn}">
             <p:growl id="message" autoUpdate="true" />
+            <p:dataTable id="knowledgeTable"
+                         styleClass="floatLeftWidth100"
+                         var="knowledge"
+                         value="#{knowledgeController.knowledgeDataModel}"
+                         paginator="true"
+                         lazy="true"
+                         rowIndexVar="row"
+                         emptyMessage="#{viewConfig.defaultEmptyMessage}"
+                         paginatorPosition="#{viewConfig.defaultPaginatorPosition}"
+                         rows="#{viewConfig.rowPerPageDefault}"
+                         paginatorTemplate="#{viewConfig.paginatorTemplate}"
+                         rowsPerPageTemplate="#{viewConfig.rowsPerPageTemplate}">
+                <!--@elvariable id="knowledge" type="com.recruitment.entity.Knowledge"-->
+                <!--@elvariable id="row" type="Integer"-->
+                <p:column headerText="#">
+                    <h:outputText value="#{row + 1}"/>
+                </p:column>
+                <p:column headerText="Wartość" sortBy="#{knowledge.value}">
+                    <h:outputText value="#{knowledge.value}"/>
+                </p:column>
+                <p:column headerText="Typ Bazowy" sortBy="#{knowledge.knowledgeBaseType.id}">
+                    <h:outputText value="#{knowledge.knowledgeBaseType.id}"/>
+                </p:column>
+                <p:column headerText="Archetyp" sortBy="#{knowledge.archetype.id}">
+                    <h:outputText value="#{knowledge.archetype.id}"/>
+                </p:column>
+                <p:column headerText="Punkty Za Wartość" sortBy="#{knowledge.points}">
+                    <h:outputText value="#{knowledge.points}"/>
+                </p:column>
+                <p:column headerText="Data" sortBy="#{knowledge.createTime}">
+                    <h:outputText value="#{knowledge.createTime}"/>
+                </p:column>
+            </p:dataTable>
         </h:form>
     </ui:define>
 </ui:composition>

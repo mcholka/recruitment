@@ -1,5 +1,7 @@
 package com.recruitment.crud;
 
+import com.recruitment.entity.Profession;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -19,5 +21,13 @@ public class ProfessionFinder {
     public List<String> getAllProfessions(){
         Query query = entityManager.createNamedQuery("Profession.getAllProfessions");
         return query.getResultList();
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<Profession> findByQuery(String query, int first, int pageSize) {
+        Query entityQuery = entityManager.createQuery(query);
+        entityQuery.setFirstResult(first);
+        entityQuery.setMaxResults(pageSize);
+        return entityQuery.getResultList();
     }
 }

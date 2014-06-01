@@ -17,6 +17,36 @@
     <ui:define name="subpageContentBody">
         <h:form rendered="#{loginChecker.loggedIn}">
             <p:growl id="message" autoUpdate="true" />
+            <p:dataTable id="archetypeTable"
+                         styleClass="floatLeftWidth100"
+                         var="archetype"
+                         value="#{archetypeController.archetypeDataModel}"
+                         paginator="true"
+                         lazy="true"
+                         rowIndexVar="row"
+                         emptyMessage="#{viewConfig.defaultEmptyMessage}"
+                         paginatorPosition="#{viewConfig.defaultPaginatorPosition}"
+                         rows="#{viewConfig.rowPerPageDefault}"
+                         paginatorTemplate="#{viewConfig.paginatorTemplate}"
+                         rowsPerPageTemplate="#{viewConfig.rowsPerPageTemplate}">
+                <!--@elvariable id="archetype" type="com.recruitment.entity.Archetype"-->
+                <!--@elvariable id="row" type="Integer"-->
+                <p:column headerText="#">
+                    <h:outputText value="#{row + 1}"/>
+                </p:column>
+                <p:column headerText="Archetyp" sortBy="#{archetype.id}">
+                    <h:outputText value="#{archetype.id}"/>
+                </p:column>
+                <p:column headerText="Typ Bazowy Archetypu" sortBy="#{archetype.knowledgeBaseType.id}">
+                    <h:outputText value="#{archetype.knowledgeBaseType.id}"/>
+                </p:column>
+                <p:column headerText="Punkty Za Archetyp" sortBy="#{archetype.points}">
+                    <h:outputText value="#{archetype.points}"/>
+                </p:column>
+                <p:column headerText="Data" sortBy="#{archetype.createTime}">
+                    <h:outputText value="#{archetype.createTime}"/>
+                </p:column>
+            </p:dataTable>
         </h:form>
     </ui:define>
 </ui:composition>

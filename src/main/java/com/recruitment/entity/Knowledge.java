@@ -3,6 +3,7 @@ package com.recruitment.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -35,6 +36,13 @@ public class Knowledge implements Serializable {
     private List<Affix> affixes;
 
     private BigDecimal points;
+
+    private Date createTime;
+
+    @PrePersist
+    public void prePersist(){
+        createTime = new Date();
+    }
 
     public Long getId() {
         return id;
@@ -82,5 +90,9 @@ public class Knowledge implements Serializable {
 
     public void setArchetype(Archetype archetype) {
         this.archetype = archetype;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
     }
 }

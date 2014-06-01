@@ -17,6 +17,33 @@
     <ui:define name="subpageContentBody">
         <h:form rendered="#{loginChecker.loggedIn}">
             <p:growl id="message" autoUpdate="true" />
+            <p:dataTable id="professionTable"
+                         styleClass="floatLeftWidth100"
+                         var="profession"
+                         value="#{professionController.professionDataModel}"
+                         paginator="true"
+                         lazy="true"
+                         rowIndexVar="row"
+                         emptyMessage="#{viewConfig.defaultEmptyMessage}"
+                         paginatorPosition="#{viewConfig.defaultPaginatorPosition}"
+                         rows="#{viewConfig.rowPerPageDefault}"
+                         paginatorTemplate="#{viewConfig.paginatorTemplate}"
+                         rowsPerPageTemplate="#{viewConfig.rowsPerPageTemplate}">
+                <!--@elvariable id="profession" type="com.recruitment.entity.Profession"-->
+                <!--@elvariable id="row" type="Integer"-->
+                <p:column headerText="#">
+                    <h:outputText value="#{row + 1}"/>
+                </p:column>
+                <p:column headerText="Profesja" sortBy="#{profession.id}">
+                    <h:outputText value="#{profession.id}"/>
+                </p:column>
+                <p:column headerText="Krótki Opis" sortBy="#{profession.description}">
+                    <h:outputText value="#{profession.description}"/>
+                </p:column>
+                <p:column headerText="Data" sortBy="#{profession.createTime}">
+                    <h:outputText value="#{profession.createTime}"/>
+                </p:column>
+            </p:dataTable>
         </h:form>
     </ui:define>
 </ui:composition>

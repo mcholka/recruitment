@@ -17,6 +17,33 @@
     <ui:define name="subpageContentBody">
         <h:form rendered="#{loginChecker.loggedIn}">
             <p:growl id="message" autoUpdate="true" />
+            <p:dataTable id="baseTypeTable"
+                         styleClass="floatLeftWidth100"
+                         var="baseType"
+                         value="#{baseTypeController.baseTypeDataModel}"
+                         paginator="true"
+                         lazy="true"
+                         rowIndexVar="row"
+                         emptyMessage="#{viewConfig.defaultEmptyMessage}"
+                         paginatorPosition="#{viewConfig.defaultPaginatorPosition}"
+                         rows="#{viewConfig.rowPerPageDefault}"
+                         paginatorTemplate="#{viewConfig.paginatorTemplate}"
+                         rowsPerPageTemplate="#{viewConfig.rowsPerPageTemplate}">
+                <!--@elvariable id="baseType" type="com.recruitment.entity.KnowledgeBaseType"-->
+                <!--@elvariable id="row" type="Integer"-->
+                <p:column headerText="#">
+                    <h:outputText value="#{row + 1}"/>
+                </p:column>
+                <p:column headerText="Typ Bazowy" sortBy="#{baseType.id}">
+                    <h:outputText value="#{baseType.id}"/>
+                </p:column>
+                <p:column headerText="Punkty Za Typ Bazowy" sortBy="#{baseType.points}">
+                    <h:outputText value="#{baseType.points}"/>
+                </p:column>
+                <p:column headerText="Data" sortBy="#{baseType.createTime}">
+                    <h:outputText value="#{baseType.createTime}"/>
+                </p:column>
+            </p:dataTable>
         </h:form>
     </ui:define>
 </ui:composition>

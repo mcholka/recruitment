@@ -29,4 +29,12 @@ public class ArchetypeFinder {
         logger.info("Try to find archetype by id: " + id);
         return entityManager.find(Archetype.class, id);
     }
+
+    @SuppressWarnings("unchecked")
+    public List<Archetype> findByQuery(String query, int first, int pageSize) {
+        Query entityQuery = entityManager.createQuery(query);
+        entityQuery.setFirstResult(first);
+        entityQuery.setMaxResults(pageSize);
+        return entityQuery.getResultList();
+    }
 }

@@ -45,4 +45,12 @@ public class KnowledgeFinder {
             return null;
         }
     }
+
+    @SuppressWarnings("unchecked")
+    public List<Knowledge> findByQuery(String query, int first, int pageSize) {
+        Query entityQuery = entityManager.createQuery(query);
+        entityQuery.setFirstResult(first);
+        entityQuery.setMaxResults(pageSize);
+        return entityQuery.getResultList();
+    }
 }
