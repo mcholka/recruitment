@@ -24,12 +24,13 @@ public class LoginChecker implements Serializable {
     private StorageManager storageManager;
 
     private Admin admin;
-    private Date limitTime;
+
+    private static final Integer SESSION_SCOPE = 5;
 
     public void loginUser(Admin admin){
         logger.info("Mark user as logged " + admin.getLogin());
         this.admin = admin;
-        this.limitTime = getLimitTime();
+        Date limitTime = getLimitTime();
         admin.setLoginTime(new Date());
         admin.setLimitTime(limitTime);
         admin.setLoggedIn(true);
@@ -42,12 +43,16 @@ public class LoginChecker implements Serializable {
             RecruitmentUtils.redirect("/admin/login.recruitment");
             return false;
         }
+
+        admin = storageManager.findByID(admin.getLogin(), Admin.class);
+
         if(!admin.isLoggedIn()){
-            RecruitmentUtils.redirect("/admin/login.recruitment");
             logger.info("Admin logged out!");
+            RecruitmentUtils.redirect("/admin/login.recruitment");
+            return false;
         }
         Date now = new Date();
-        if(now.after(limitTime)){
+        if(now.after(admin.getLimitTime())){
             logger.info("Limit time exceeded!");
             loggedOut();
             return false;
@@ -62,13 +67,12 @@ public class LoginChecker implements Serializable {
         admin.setLimitTime(null);
         storageManager.update(admin);
         admin = null;
-        limitTime = null;
         RecruitmentUtils.redirect("/admin/login.recruitment");
     }
 
     private Date getLimitTime() {
         Calendar limit = Calendar.getInstance();
-        limit.add(Calendar.MINUTE, 5);
+        limit.add(Calendar.MINUTE, SESSION_SCOPE);
         return limit.getTime();
     }
 }

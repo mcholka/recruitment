@@ -19,20 +19,20 @@ public class StorageManager implements Serializable {
     private EntityManager entityManager;
 
     public <T> void persist(T object){
-        logger.info("Persist object: " + object.getClass().getName() + " to db");
+//        logger.info("Persist object: " + object.getClass().getName() + " to db");
         entityManager.persist(object);
         entityManager.flush();
     }
 
     public <T> T update(T object){
-        logger.info("Update object: " + object.getClass().getName());
+//        logger.info("Update object: " + object.getClass().getName());
         entityManager.merge(object);
         entityManager.flush();
         return object;
     }
 
     public <T> T findByID(Object id, Class<T> type) {
-        logger.info("Try to find class: " + type + " by id: " + id);
+//        logger.info("Try to find class: " + type + " by id: " + id);
         T object = entityManager.find(type, id);
         checkEmpty(object, id, type);
         return object;
