@@ -28,14 +28,22 @@
                          paginatorPosition="#{viewConfig.defaultPaginatorPosition}"
                          rows="#{viewConfig.rowPerPageDefault}"
                          paginatorTemplate="#{viewConfig.paginatorTemplate}"
-                         rowsPerPageTemplate="#{viewConfig.rowsPerPageTemplate}">
+                         rowsPerPageTemplate="#{viewConfig.rowsPerPageTemplate}"
+                         editable="true">
+
+                <p:ajax event="rowEdit"
+                        listener="#{knowledgeController.onRowEdit}"/>
+
                 <!--@elvariable id="knowledge" type="com.recruitment.entity.Knowledge"-->
                 <!--@elvariable id="row" type="Integer"-->
                 <p:column headerText="#">
                     <h:outputText value="#{row + 1}"/>
                 </p:column>
                 <p:column headerText="Wartość" sortBy="#{knowledge.value}">
-                    <h:outputText value="#{knowledge.value}"/>
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{knowledge.value}"/></f:facet>
+                        <f:facet name="input"><p:inputText value="#{knowledge.value}"/></f:facet>
+                    </p:cellEditor>
                 </p:column>
                 <p:column headerText="Typ Bazowy" sortBy="#{knowledge.knowledgeBaseType.id}">
                     <h:outputText value="#{knowledge.knowledgeBaseType.id}"/>
@@ -44,10 +52,16 @@
                     <h:outputText value="#{knowledge.archetype.id}"/>
                 </p:column>
                 <p:column headerText="Punkty Za Wartość" sortBy="#{knowledge.points}">
-                    <h:outputText value="#{knowledge.points}"/>
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{knowledge.points}"/></f:facet>
+                        <f:facet name="input"><p:inputText value="#{knowledge.points}"/></f:facet>
+                    </p:cellEditor>
                 </p:column>
                 <p:column headerText="Data" sortBy="#{knowledge.createTime}">
                     <h:outputText value="#{knowledge.createTime}"/>
+                </p:column>
+                <p:column headerText="Edytuj">
+                    <p:rowEditor />
                 </p:column>
             </p:dataTable>
         </h:form>

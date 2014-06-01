@@ -28,7 +28,12 @@
                          paginatorPosition="#{viewConfig.defaultPaginatorPosition}"
                          rows="#{viewConfig.rowPerPageDefault}"
                          paginatorTemplate="#{viewConfig.paginatorTemplate}"
-                         rowsPerPageTemplate="#{viewConfig.rowsPerPageTemplate}">
+                         rowsPerPageTemplate="#{viewConfig.rowsPerPageTemplate}"
+                         editable="true">
+
+                <p:ajax event="rowEdit"
+                        listener="#{professionController.onRowEdit}"/>
+
                 <!--@elvariable id="profession" type="com.recruitment.entity.Profession"-->
                 <!--@elvariable id="row" type="Integer"-->
                 <p:column headerText="#">
@@ -38,10 +43,16 @@
                     <h:outputText value="#{profession.id}"/>
                 </p:column>
                 <p:column headerText="Krótki Opis" sortBy="#{profession.description}">
-                    <h:outputText value="#{profession.description}"/>
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{profession.description}"/></f:facet>
+                        <f:facet name="input"><p:inputText value="#{profession.description}"/></f:facet>
+                    </p:cellEditor>
                 </p:column>
                 <p:column headerText="Data" sortBy="#{profession.createTime}">
                     <h:outputText value="#{profession.createTime}"/>
+                </p:column>
+                <p:column headerText="Edytuj">
+                    <p:rowEditor />
                 </p:column>
             </p:dataTable>
         </h:form>

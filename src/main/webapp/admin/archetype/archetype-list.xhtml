@@ -28,7 +28,12 @@
                          paginatorPosition="#{viewConfig.defaultPaginatorPosition}"
                          rows="#{viewConfig.rowPerPageDefault}"
                          paginatorTemplate="#{viewConfig.paginatorTemplate}"
-                         rowsPerPageTemplate="#{viewConfig.rowsPerPageTemplate}">
+                         rowsPerPageTemplate="#{viewConfig.rowsPerPageTemplate}"
+                         editable="true">
+
+                <p:ajax event="rowEdit"
+                        listener="#{archetypeController.onRowEdit}"/>
+
                 <!--@elvariable id="archetype" type="com.recruitment.entity.Archetype"-->
                 <!--@elvariable id="row" type="Integer"-->
                 <p:column headerText="#">
@@ -41,10 +46,16 @@
                     <h:outputText value="#{archetype.knowledgeBaseType.id}"/>
                 </p:column>
                 <p:column headerText="Punkty Za Archetyp" sortBy="#{archetype.points}">
-                    <h:outputText value="#{archetype.points}"/>
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{archetype.points}"/></f:facet>
+                        <f:facet name="input"><p:inputText value="#{archetype.points}"/></f:facet>
+                    </p:cellEditor>
                 </p:column>
                 <p:column headerText="Data" sortBy="#{archetype.createTime}">
                     <h:outputText value="#{archetype.createTime}"/>
+                </p:column>
+                <p:column headerText="Edytuj">
+                    <p:rowEditor />
                 </p:column>
             </p:dataTable>
         </h:form>

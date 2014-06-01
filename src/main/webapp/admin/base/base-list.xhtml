@@ -28,7 +28,12 @@
                          paginatorPosition="#{viewConfig.defaultPaginatorPosition}"
                          rows="#{viewConfig.rowPerPageDefault}"
                          paginatorTemplate="#{viewConfig.paginatorTemplate}"
-                         rowsPerPageTemplate="#{viewConfig.rowsPerPageTemplate}">
+                         rowsPerPageTemplate="#{viewConfig.rowsPerPageTemplate}"
+                         editable="true">
+
+                <p:ajax event="rowEdit"
+                        listener="#{baseTypeController.onRowEdit}"/>
+
                 <!--@elvariable id="baseType" type="com.recruitment.entity.KnowledgeBaseType"-->
                 <!--@elvariable id="row" type="Integer"-->
                 <p:column headerText="#">
@@ -38,10 +43,16 @@
                     <h:outputText value="#{baseType.id}"/>
                 </p:column>
                 <p:column headerText="Punkty Za Typ Bazowy" sortBy="#{baseType.points}">
-                    <h:outputText value="#{baseType.points}"/>
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{baseType.points}"/></f:facet>
+                        <f:facet name="input"><p:inputText value="#{baseType.points}"/></f:facet>
+                    </p:cellEditor>
                 </p:column>
                 <p:column headerText="Data" sortBy="#{baseType.createTime}">
                     <h:outputText value="#{baseType.createTime}"/>
+                </p:column>
+                <p:column headerText="Edytuj">
+                    <p:rowEditor />
                 </p:column>
             </p:dataTable>
         </h:form>

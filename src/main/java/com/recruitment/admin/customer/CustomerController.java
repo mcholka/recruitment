@@ -5,6 +5,7 @@ import com.recruitment.common.VerifyStatus;
 import com.recruitment.crud.StorageManager;
 import com.recruitment.entity.CustomerData;
 import org.apache.log4j.Logger;
+import org.primefaces.event.RowEditEvent;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
@@ -32,6 +33,12 @@ public class CustomerController implements Serializable {
 
     private StreamedContent streamedContent;
 
+    public void onRowEdit(RowEditEvent event){
+        CustomerData customerData = (CustomerData) event.getObject();
+        storageManager.update(customerData);
+        RecruitmentUtils.logMessage("Aplikant " + customerData.getLastName() + " oceniony");
+    }
+
     public void loadPDF(CustomerData customerData){
         logger.info("load pdf for customer: " + customerData.getId());
         InputStream iS = new ByteArrayInputStream(customerData.getStoredCv());
@@ -44,10 +51,6 @@ public class CustomerController implements Serializable {
             items.add(new SelectItem(verifyStatus, verifyStatus.name())) ;
         }
         return items;
-    }
-
-    public void update(CustomerData customerData){
-        storageManager.update(customerData);
     }
 
     public StreamedContent getStreamedContent() {

@@ -28,7 +28,12 @@
                          paginatorPosition="#{viewConfig.defaultPaginatorPosition}"
                          rows="#{viewConfig.rowPerPageDefault}"
                          paginatorTemplate="#{viewConfig.paginatorTemplate}"
-                         rowsPerPageTemplate="#{viewConfig.rowsPerPageTemplate}">
+                         rowsPerPageTemplate="#{viewConfig.rowsPerPageTemplate}"
+                         editable="true">
+
+                <p:ajax event="rowEdit"
+                        listener="#{customerController.onRowEdit}"/>
+
                 <!--@elvariable id="customer" type="com.recruitment.entity.CustomerData"-->
                 <!--@elvariable id="row" type="Integer"-->
                 <p:column headerText="#">
@@ -55,15 +60,18 @@
                 <p:column headerText="Punkty" sortBy="#{customer.ratedData.sumPoints}">
                     <h:outputText value="#{customer.ratedData.sumPoints}"/>
                 </p:column>
-
                 <p:column headerText="Ocena" sortBy="#{customer.verifyStatus}">
-                    <p:inplace editor="true">
-                        <p:selectOneMenu value="#{customer.verifyStatus}"
-                                         effect="puff"
-                                         onchange="#{customerController.update(customer)} ">
-                            <f:selectItems value="#{customerController.verifyStatusList}" />
-                        </p:selectOneMenu>
-                    </p:inplace>
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <h:outputText value="#{customer.verifyStatus}" />
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:selectOneMenu value="#{customer.verifyStatus}"
+                                             effect="puff" style="width: 95%">
+                                <f:selectItems value="#{customerController.verifyStatusList}" />
+                            </p:selectOneMenu>
+                        </f:facet>
+                    </p:cellEditor>
                 </p:column>
                 <p:column headerText="CV">
                     <p:commandButton value="Pobierz"
@@ -73,6 +81,9 @@
                                      icon="ui-icon-arrowthick-1-s">
                         <p:fileDownload value="#{customerController.streamedContent}" />
                     </p:commandButton>
+                </p:column>
+                <p:column headerText="Oceń">
+                    <p:rowEditor />
                 </p:column>
             </p:dataTable>
         </h:form>
