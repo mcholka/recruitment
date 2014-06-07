@@ -63,7 +63,7 @@
                 <p:column headerText="Ocena" sortBy="#{customer.verifyStatus}">
                     <p:cellEditor>
                         <f:facet name="output">
-                            <h:outputText value="#{customer.verifyStatus}" />
+                            <h:outputText value="#{customer.verifyStatus.status}" />
                         </f:facet>
                         <f:facet name="input">
                             <p:selectOneMenu value="#{customer.verifyStatus}"
@@ -85,7 +85,29 @@
                 <p:column headerText="Oceń">
                     <p:rowEditor />
                 </p:column>
+                <p:column headerText="Dane">
+                    <p:commandButton icon="ui-icon-search"
+                                     process="@this"
+                                     update="@form"
+                                     action="#{customerController.buildModel}"
+                                     oncomplete="detailsWindow.show()">
+                        <f:setPropertyActionListener value="#{customer}" target="#{customerController.customerData}" />
+                    </p:commandButton>
+                </p:column>
             </p:dataTable>
+
+            <p:dialog id="detailsWindow"
+                      header="Wyfiltrowane Dane"
+                      widgetVar="detailsWindow"
+                      dynamic="true"
+                      resizable="false"
+                      showEffect="puff"
+                      hideEffect="puff">
+                <h:panelGrid columns="2">
+                    <p:tagCloud model="#{customerController.model}" />
+                    <p:commandButton value="Zamknij" onclick="pass.hide();" process="@this"/>
+                </h:panelGrid>
+            </p:dialog>
         </h:form>
     </ui:define>
 </ui:composition>

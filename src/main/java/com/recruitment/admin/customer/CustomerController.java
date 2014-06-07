@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import org.primefaces.event.RowEditEvent;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
+import org.primefaces.model.tagcloud.TagCloudModel;
 
 import javax.faces.model.SelectItem;
 import javax.faces.view.ViewScoped;
@@ -30,8 +31,14 @@ public class CustomerController implements Serializable {
     private CustomerDataModel customerDataModel;
     @Inject
     private StorageManager storageManager;
+    @Inject
+    private CloudModelBuilder cloudModelBuilder;
 
     private StreamedContent streamedContent;
+
+    private CustomerData customerData;
+
+    private TagCloudModel model;
 
     public void onRowEdit(RowEditEvent event){
         CustomerData customerData = (CustomerData) event.getObject();
@@ -48,9 +55,13 @@ public class CustomerController implements Serializable {
     public List<SelectItem> getVerifyStatusList() {
         List<SelectItem> items = new ArrayList<SelectItem>();
         for(VerifyStatus verifyStatus: VerifyStatus.values()) {
-            items.add(new SelectItem(verifyStatus, verifyStatus.name())) ;
+            items.add(new SelectItem(verifyStatus, verifyStatus.getStatus())) ;
         }
         return items;
+    }
+
+    public void buildModel(){
+        model = cloudModelBuilder.build(customerData);
     }
 
     public StreamedContent getStreamedContent() {
@@ -67,5 +78,21 @@ public class CustomerController implements Serializable {
 
     public void setCustomerDataModel(CustomerDataModel customerDataModel) {
         this.customerDataModel = customerDataModel;
+    }
+
+    public CustomerData getCustomerData() {
+        return customerData;
+    }
+
+    public void setCustomerData(CustomerData customerData) {
+        this.customerData = customerData;
+    }
+
+    public TagCloudModel getModel() {
+        return model;
+    }
+
+    public void setModel(TagCloudModel model) {
+        this.model = model;
     }
 }
