@@ -54,7 +54,7 @@
                 <p:column headerText="Data" sortBy="#{customer.createTime}">
                     <h:outputText value="#{customer.createTime}"/>
                 </p:column>
-                <p:column headerText="Status" sortBy="#{customer.processStatus.description}">
+                <p:column headerText="Status" sortBy="#{customer.processStatus}">
                     <h:outputText value="#{customer.processStatus.description}"/>
                 </p:column>
                 <p:column headerText="Punkty" sortBy="#{customer.ratedData.sumPoints}">
