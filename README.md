@@ -23,6 +23,7 @@ KONFIGURACJA
 ============
 
 Po ściągnięciu serwera Wildfly 8.0.0.final jedyne co musimy zmienić to w pliku standalone.xml zmieniamy sekcję datasource:
+```xml
 <datasource jndi-name="java:/Recruitment" pool-name="Recruitment" enabled="true" use-java-context="true">
     <connection-url>jdbc:h2:tcp://localhost/~/test</connection-url>
     <driver>h2</driver>
@@ -30,5 +31,6 @@ Po ściągnięciu serwera Wildfly 8.0.0.final jedyne co musimy zmienić to w pli
         <user-name>sa</user-name>
     </security>
 </datasource>
+```
 Baza danych jedynie wymaga zainstalowania bądź na środowisku linux odpalenia w tle np: screen java -jar <nasz_plik_h2>.jar
 Po zbudowaniu paczki war projektu i wrzuceniu w wildfly'u do katalogu deployments aplikacja powinna odpowiadać na: http://localhost:8080/recruitment
